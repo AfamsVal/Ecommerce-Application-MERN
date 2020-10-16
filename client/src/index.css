@@ -19,6 +19,9 @@ body {
 .text-milk {
   color: #f3f2ee;
 }
+.cursor-pointer {
+  cursor: pointer;
+}
 
 .font-size-1 {
   font-size: 12px;
@@ -51,6 +54,14 @@ body {
   width: 16%;
 }
 
+/* color */
+.text-brown {
+  color: brown;
+}
+.bg-gray {
+  background-color: #dddddd;
+}
+
 /* product card design */
 
 .card-hover {
@@ -73,7 +84,7 @@ body {
 .product-card {
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   border-radius: 5px 5px 0 0;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 /* end of product card */
 
