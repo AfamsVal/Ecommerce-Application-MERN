@@ -1,0 +1,26 @@
+{
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "mern ecommerce",
+  "main": "server.js",
+  "scripts": {
+    "client":"npm start --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "dev":"concurrently \"npm run server \" \" npm run client \"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "test": "jest"
+  },
+  "keywords": [
+    "ecommerce",
+    "website"
+  ],
+  "author": "Afams Val",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.5"
+  }
+}
