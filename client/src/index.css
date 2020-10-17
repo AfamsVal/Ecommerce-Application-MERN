@@ -58,6 +58,9 @@ body {
 .text-brown {
   color: brown;
 }
+.text-gray {
+  color: #666;
+}
 .bg-gray {
   background-color: #dddddd;
 }

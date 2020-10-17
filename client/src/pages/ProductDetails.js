@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react"
 import { PRODUCTS } from "../products"
+import Rating from "../components/Rating"
 
 const ProductDetails = (props) => {
   const { goBack } = props.history
-  const name = "val"
-  const { _id } = props.match.params
+  const { id } = props.match.params
   const [product, setProduct] = useState({})
+
   useEffect(() => {
-    // const fetchData = async () => {
-    //   const item = await PRODUCTS.json()
-    //   return item
-    // }
-    // //setProduct({ item })
-    // console.log(fetchData())
-  }, [_id])
-  // console.log(product)
+    const data = PRODUCTS.find((p) => p._id.toString() === id)
+    setProduct(data)
+  }, [id])
+
+  const {
+    description,
+    category,
+    name,
+    images,
+    price,
+    rating,
+    numReviews,
+  } = product
+
   return (
     <section>
       <div className="container mt-6 mb-2">
@@ -27,35 +34,31 @@ const ProductDetails = (props) => {
         <div className="card py-5 px-5 mt-2 mb-5">
           <div className="wrapper row">
             <div className="col-md-6">
-              <img
-                className="w-100"
-                src="http://placekitten.com/400/252"
-                alt={name}
-              />
+              <img className="w-100" src={images} alt={name} />
             </div>
             <div className="col-md-6">
-              <h3 className="text-uppercase font-weight-bold">
-                men's shoes fashion
-              </h3>
-              <div>
-                <div>
-                  <span className="fa fa-star text-warning"></span>
-                  <span className="fa fa-star text-warning"></span>
-                  <span className="fa fa-star-half text-warning"></span>
-                  <span className="fa fa-star"></span>
-                  <span className="fa fa-star"></span>
-                </div>
-                <span className="review-no">41 reviews</span>
-              </div>
-              <p className="product-description my-3">
-                Suspendisse quos? Tempus cras iure temporibus? Eu laudantium
-                cubilia sem sem! Repudiandae et! Massa senectus enim minim
-                sociosqu delectus posuere.
+              <p className="font-size-3 text-gray">
+                <span>
+                  <i className="fa fa-home font-size-4 "></i>
+                </span>
+                <span className="ml-2">
+                  <i className="fa fa-long-arrow-right"></i> Products
+                </span>
+                <span className="ml-2">
+                  <i className="fa fa-long-arrow-right"></i> {category}
+                </span>
               </p>
+              <hr />
+              <h3 className="text-uppercase font-weight-bold">{name}</h3>
+              <div>
+                <Rating rating={rating} numReviews={`${numReviews} reviews`} />
+              </div>
+              <p className="product-description my-3">{description}</p>
               <h4>
-                Current price: <span className="font-weight-bolder">$180</span>
+                Current price:{" "}
+                <span className="font-weight-bolder">${price}</span>
               </h4>
-              <p className="vote">
+              <p className="vote mt-3">
                 <strong>91%</strong> of buyers enjoyed this product!{" "}
                 <strong>(87 votes)</strong>
               </p>
