@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const Checkout = () => {
   return (
     <div className="register-form">
-      <form method="post">
+      <form>
         <h2 className="text-center">Register</h2>
         <div className="form-group mt-4">
           <input type="text" className="form-control" placeholder="Full Name" />
