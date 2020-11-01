@@ -1,8 +1,13 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import CheckoutItem from "../components/CheckoutItem"
 const PRODUCTS = []
-const Checkout = () => {
+const Checkout = (props) => {
+  //React-router-dom Link open at the top of page
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [props.location.pathname])
+
   return (
     <section className="mt-6 mb-5">
       <div className="container bg-light shadow-box">

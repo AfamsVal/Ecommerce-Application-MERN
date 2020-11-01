@@ -1,8 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import HelpContent from "../components/HelpContent"
 import HelpFeedback from "../components/HelpFeedback"
 
+//React-router-dom Link open at the top of page
 const Help = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
   return (
     <div className="container mt-6">
       <h1 className="text-center text-uppercase font-weight-bold mb-2">

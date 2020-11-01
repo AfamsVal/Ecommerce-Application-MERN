@@ -1,6 +1,10 @@
-import React from "react"
+import React, { useEffect } from "react"
 
+//React-router-dom Link open at the top of page
 const ContactUs = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
   return (
     <section>
       <div className="container mt-6 ">

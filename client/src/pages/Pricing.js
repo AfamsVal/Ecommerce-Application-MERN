@@ -1,7 +1,10 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 
 const Pricing = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
   return (
     <section className="pricing mt-6">
       <div className="container">
