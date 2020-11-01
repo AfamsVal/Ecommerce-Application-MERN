@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
-import { PRODUCTS } from "../products"
 import Rating from "../components/Rating"
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
+import axios from "axios"
 
 const ProductDetails = (props) => {
   const { goBack } = props.history
@@ -8,8 +9,16 @@ const ProductDetails = (props) => {
   const [product, setProduct] = useState({})
 
   useEffect(() => {
-    const data = PRODUCTS.find((p) => p._id.toString() === id)
-    setProduct(data)
+    const getProduct = async () => {
+      try {
+        const { data } = await axios(`/api/products/${id}`)
+        setProduct(data)
+      } catch (err) {
+        const { error } = err.response
+        console.log(error)
+      }
+    }
+    getProduct()
   }, [id])
 
   const {
@@ -22,21 +31,33 @@ const ProductDetails = (props) => {
     numReviews,
   } = product
 
-  return (
+  return Object.keys(product).length === 0 ? (
+    <div className="container mt-6 mb-2">
+      <div className="row mb-5">
+        <div className="col-12 col-sm-5">
+          <SkeletonTheme color="#ddd" highlightColor="#ccc">
+            <Skeleton count={1} height={400} />
+          </SkeletonTheme>
+        </div>
+        <div className="col-12 col-sm-7">
+          <SkeletonTheme color="#ddd" highlightColor="#ccc">
+            <Skeleton count={7} height={60} />
+          </SkeletonTheme>
+        </div>
+      </div>
+    </div>
+  ) : (
     <section>
       <div className="container mt-6 mb-2">
-        <div
-          onClick={() => goBack()}
-          className="text-dark font-weight-bold cursor-pointer"
-        >
-          <i className="fas fa-arrow-left mr-2"></i> Go back
-        </div>
-        <div className="card py-5 px-5 mt-2 mb-5">
-          <div className="wrapper row">
-            <div className="col-md-6">
-              <img className="w-100" src={images} alt={name} />
-            </div>
-            <div className="col-md-6">
+        <div className="row mb-5">
+          <div
+            onClick={() => goBack()}
+            className="col-12 text-dark font-weight-bold cursor-pointer"
+          >
+            <i className="fas fa-arrow-left mr-2"></i> Go back
+          </div>
+          <div className="col-sm-5 mt-3">
+            <div className="card pt-4 px-5 mt-2">
               <p className="font-size-3 text-gray">
                 <span>
                   <i className="fa fa-home font-size-4 "></i>
@@ -49,9 +70,19 @@ const ProductDetails = (props) => {
                 </span>
               </p>
               <hr />
+              <img className="w-100" src={images} alt={name} />
+            </div>
+          </div>
+          <div className="col-sm-7">
+            <div className="card py-5 px-5 mt-2 mb-5">
               <h3 className="text-uppercase font-weight-bold">{name}</h3>
               <div>
-                <Rating rating={rating} numReviews={`${numReviews} reviews`} />
+                {rating && (
+                  <Rating
+                    rating={rating}
+                    numReviews={`${numReviews} reviews`}
+                  />
+                )}
               </div>
               <p className="product-description my-3">{description}</p>
               <h4>
