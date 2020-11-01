@@ -35,7 +35,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item mr-4">
             <Link to="/pricing" className="nav-link">
-              <i className="fa fa-info-circle"></i> Pricing
+              <i className="fa fa-certificate"></i> Pricing
             </Link>
           </li>
           <li className="nav-item">
@@ -53,7 +53,7 @@ const Navbar = () => {
         <ul className="navbar-nav">
           <li className="nav-item mr-4">
             <Link to="/checkout" className="nav-link" href="#">
-              <i className="fa fa-shopping-cart">
+              <i className="fas fa-shopping-cart">
                 <sup className="font-size-2 text-danger g-font">
                   <span className="badge badge-danger">2</span>
                 </sup>
@@ -62,12 +62,12 @@ const Navbar = () => {
           </li>
           <li className="nav-item mr-4">
             <Link to="/register" className="nav-link">
-              <i className="fa fa-lock-alt"></i> Register
+              <i className="fas fa-lock-alt"></i> Register
             </Link>
           </li>
           <li className="nav-item mr-4">
             <Link to="/login" className="nav-link">
-              <i className="fa fa-unlock"></i> Login
+              <i className="fas fa-unlock"></i> Login
             </Link>
           </li>
         </ul>

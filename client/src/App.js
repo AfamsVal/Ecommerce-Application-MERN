@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useState } from "react"
 import "./App.css"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
+import LoadingBar from "react-top-loading-bar"
 import Navbar from "./components/Navbar"
 import Landing from "./pages/Landing"
 import Checkout from "./pages/Checkout"
@@ -15,8 +16,16 @@ import ForgotPassword from "./pages/ForgotPassword"
 import Footer from "./components/Footer"
 
 function App() {
+  const [progress, setProgress] = useState(70)
   return (
     <Router>
+      {/* //react-top-loading-bar */}
+      <LoadingBar
+        color="red"
+        height={4}
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <Navbar />
       <Switch>
         <Route path="/" exact component={Landing} />

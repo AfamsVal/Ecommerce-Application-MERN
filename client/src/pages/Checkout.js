@@ -1,15 +1,21 @@
 import React from "react"
 import { Link } from "react-router-dom"
-
+import CheckoutItem from "../components/CheckoutItem"
+const PRODUCTS = []
 const Checkout = () => {
   return (
     <section className="mt-6 mb-5">
       <div className="container bg-light shadow-box">
         <div className="row w-100">
           <div className="col-lg-12 col-md-12 col-12 py-3">
-            <h3 className="display-5 mb-2 text-center">Shopping Cart</h3>
+            <h3 className="display-5 mb-2 font-weight-bold text-center">
+              Shopping Cart
+            </h3>
             <p className="mb-5 text-center">
-              <i className="text-info font-weight-bold">3</i> items in your cart
+              <i className="text-danger font-weight-bold font-size-3">
+                {PRODUCTS.length}
+              </i>{" "}
+              items in your cart
             </p>
             <table
               id="shoppingCart"
@@ -24,111 +30,7 @@ const Checkout = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td data-th="Product">
-                    <div className="row">
-                      <div className="col-md-3 text-left">
-                        <img
-                          src="https://via.placeholder.com/250x250/5fa9f8/ffffff"
-                          alt=""
-                          className="img-fluid d-none d-md-block rounded mb-2 shadow "
-                        />
-                      </div>
-                      <div className="col-md-9 text-left mt-sm-2">
-                        <h4>Product Name</h4>
-                        <p className="font-weight-light">Brand &amp; Name</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td data-th="Price">$49.00</td>
-                  <td data-th="Quantity">
-                    <input
-                      type="number"
-                      className="form-control form-control-lg text-center"
-                      value="1"
-                    />
-                  </td>
-                  <td className="actions" data-th="">
-                    <div className="text-right">
-                      <button className="btn btn-white border-secondary bg-white btn-md mb-2">
-                        <i className="fas fa-sync"></i>
-                      </button>
-                      <button className="btn btn-white border-secondary bg-white btn-md mb-2">
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-th="Product">
-                    <div className="row">
-                      <div className="col-md-3 text-left">
-                        <img
-                          src="https://via.placeholder.com/250x250/5fa9f8/ffffff"
-                          alt=""
-                          className="img-fluid d-none d-md-block rounded mb-2 shadow "
-                        />
-                      </div>
-                      <div className="col-md-9 text-left mt-sm-2">
-                        <h4>Product Name</h4>
-                        <p className="font-weight-light">Brand &amp; Name</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td data-th="Price">$49.00</td>
-                  <td data-th="Quantity">
-                    <input
-                      type="number"
-                      className="form-control form-control-lg text-center"
-                      value="1"
-                    />
-                  </td>
-                  <td className="actions" data-th="">
-                    <div className="text-right">
-                      <button className="btn btn-white border-secondary bg-white btn-md mb-2">
-                        <i className="fas fa-sync"></i>
-                      </button>
-                      <button className="btn btn-white border-secondary bg-white btn-md mb-2">
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td data-th="Product">
-                    <div className="row">
-                      <div className="col-md-3 text-left">
-                        <img
-                          src="https://via.placeholder.com/250x250/5fa9f8/ffffff"
-                          alt=""
-                          className="img-fluid d-none d-md-block rounded mb-2 shadow "
-                        />
-                      </div>
-                      <div className="col-md-9 text-left mt-sm-2">
-                        <h4>Product Name</h4>
-                        <p className="font-weight-light">Brand &amp; Name</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td data-th="Price">$49.00</td>
-                  <td data-th="Quantity">
-                    <input
-                      type="number"
-                      className="form-control form-control-lg text-center"
-                      value="1"
-                    />
-                  </td>
-                  <td className="actions" data-th="">
-                    <div className="text-right">
-                      <button className="btn btn-white border-secondary bg-white btn-md mb-2">
-                        <i className="fas fa-sync"></i>
-                      </button>
-                      <button className="btn btn-white border-secondary bg-white btn-md mb-2">
-                        <i className="fas fa-trash"></i>
-                      </button>
-                    </div>
-                  </td>
-                </tr>
+                <CheckoutItem items={PRODUCTS} />
               </tbody>
             </table>
             <div className="float-right text-right">
