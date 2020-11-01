@@ -5,7 +5,7 @@ const CheckoutItem = ({ items }) => {
   return items.length > 0
     ? items.map((item) => (
         <tr>
-          <td data-th="Product">
+          <td>
             <div className="row">
               <div className="col-md-3 text-left">
                 <img

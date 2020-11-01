@@ -21,6 +21,10 @@ const ProductDetails = (props) => {
     getProduct()
   }, [id])
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
+
   const {
     description,
     category,

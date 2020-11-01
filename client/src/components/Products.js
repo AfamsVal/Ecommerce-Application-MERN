@@ -4,10 +4,10 @@ import Rating from "../components/Rating"
 import PropTypes from "prop-types"
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
 
-const Products = ({ products }) => {
+const Products = ({ loading, products }) => {
   return (
     <>
-      {Object.keys(products).length !== 0 ? (
+      {!loading ? (
         products.map(({ _id, name, images, price, rating, numReviews }) => (
           <div key={_id} className="col-6 col-sm-6 col-md-4 col-lg-3 py-2">
             <div className="card-hover product-card mx-auto bg-light border h-80">

@@ -2,31 +2,30 @@ import React, { useState, useEffect } from "react"
 import Carosel from "../components/Carosel"
 import Products from "../components/Products"
 import InputText from "../components/InputText"
-import axios from "axios"
+import { useSelector, useDispatch } from "react-redux"
+import { listProducts } from "../action/productActions"
 
 const Landing = () => {
-  const [products, setProducts] = useState([])
+  const { loading, products } = useSelector(({ productList }) => productList)
+  const dispatch = useDispatch()
+
   const [input, setInput] = useState("")
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      const { data } = await axios.get("/api/products", {
-        params: {
-          search: input,
-        },
-      })
-      setProducts(data)
-    }
-    fetchProduct()
-  }, [input])
+    dispatch(listProducts())
+  }, [dispatch])
 
-  // scroll
+  // Scroll
   const [myRef, setMyRef] = useState({ current: null })
 
   const scroll = (ref) => {
     setMyRef({ ...myRef, ref })
     myRef.current.scrollIntoView({ behavior: "smooth" })
   }
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  })
 
   return (
     <div>
@@ -53,7 +52,7 @@ const Landing = () => {
         </div>
 
         <div className="row mb-5 my-4">
-          <Products products={products} />
+          <Products loading={loading} products={products} />
         </div>
       </div>
     </div>
