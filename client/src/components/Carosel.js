@@ -25,7 +25,7 @@ const Carosel = (props) => {
         <div className="carousel-item active">
           <img className="d-block w-100" src={s20} alt="Samsung s20" />
           <div className="carousel-caption">
-            <h3>Super Amazing Products</h3>
+            <h3>{/* Super Amazing Products */}</h3>
             <button
               onClick={() => {
                 props.scroll(myRef)

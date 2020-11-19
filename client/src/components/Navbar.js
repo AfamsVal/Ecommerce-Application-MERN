@@ -1,8 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import { useSelector } from "react-redux"
+
 //import { SmileOutlined } from '@ant-design/icons';
 
 const Navbar = () => {
+  const { cartItems } = useSelector((state) => state.cart)
   return (
     <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
       <Link to="/" className="navbar-brand ml-3" href="#">
@@ -54,9 +57,13 @@ const Navbar = () => {
           <li className="nav-item mr-4">
             <Link to="/checkout" className="nav-link" href="#">
               <i className="fas fa-shopping-cart">
-                <sup className="font-size-2 text-danger g-font">
-                  <span className="badge badge-danger">2</span>
-                </sup>
+                {cartItems.length !== 0 && (
+                  <sup className="font-size-2 text-danger g-font">
+                    <span className="badge badge-danger">
+                      {cartItems.length}
+                    </span>
+                  </sup>
+                )}
               </i>
             </Link>
           </li>

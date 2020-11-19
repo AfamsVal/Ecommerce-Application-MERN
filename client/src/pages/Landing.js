@@ -5,8 +5,10 @@ import InputText from "../components/InputText"
 import { useSelector, useDispatch } from "react-redux"
 import { listProducts } from "../action/productActions"
 
-const Landing = () => {
-  const { loading, products } = useSelector(({ productList }) => productList)
+const Landing = (props) => {
+  const { error, loading, products } = useSelector(
+    ({ productList }) => productList
+  )
   const dispatch = useDispatch()
 
   const [input, setInput] = useState("")
@@ -23,9 +25,9 @@ const Landing = () => {
     myRef.current.scrollIntoView({ behavior: "smooth" })
   }
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  })
+  // useEffect(() => {
+  //   window.scrollTo(0, 0)
+  // }, [props.location.pathname])
 
   return (
     <div>
@@ -52,7 +54,7 @@ const Landing = () => {
         </div>
 
         <div className="row mb-5 my-4">
-          <Products loading={loading} products={products} />
+          <Products error={error} loading={loading} products={products} />
         </div>
       </div>
     </div>

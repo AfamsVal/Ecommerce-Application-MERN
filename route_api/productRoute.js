@@ -9,9 +9,11 @@ const router = express.Router()
 //@access Public
 router.get(
   "/",
-  asyncHandler(async (req, res, next) => {
-    const data = await ProductModel.find()
-    res.status(200).json(data)
+  asyncHandler(async (req, res) => {
+    const products = await ProductModel.find({})
+    // res.status(401)
+    // throw new Error("Product not found!")
+    res.json(products)
   })
 )
 

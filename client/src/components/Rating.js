@@ -10,7 +10,7 @@ const Rating = ({ rating, numReviews }) => {
     ) : rating === no - 0.5 ? (
       <i key={no} className="pr-1 fa fa-star-half-o text-brown"></i>
     ) : (
-      <i key={no} className="fa fa-star-o"></i>
+      <i key={no} className="pr-1 fa fa-star-o"></i>
     )
   )
   return (
