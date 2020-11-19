@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import "./App.css"
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import LoadingBar from "react-top-loading-bar"
 import Navbar from "./components/Navbar"
@@ -29,7 +28,7 @@ function App() {
       <Navbar />
       <Switch>
         <Route path="/" exact component={Landing} />
-        <Route path="/checkout" exact component={Checkout} />
+        <Route path="/checkout/:id?" exact component={Checkout} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
         <Route path="/contact-us" exact component={ContactUs} />

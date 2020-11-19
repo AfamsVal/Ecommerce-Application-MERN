@@ -92,7 +92,7 @@ body {
 }
 
 .btn {
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 
 .carosel-btn {
@@ -250,8 +250,20 @@ new login here */
   text-indent: 6px;
   height: 40px;
 }
+.btn-outline-none {
+  outline: none;
+  outline: none !important;
+  box-shadow: none;
+}
 
 .register-photo form .form-check {
   font-size: 13px;
   line-height: 20px;
+}
+dropdown {
+  height: 100px;
+}
+
+.pay-btn {
+  padding: 15px 45px;
 }
