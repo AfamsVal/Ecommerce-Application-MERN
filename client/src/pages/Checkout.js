@@ -1,7 +1,11 @@
 import React, { useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { cartAction } from "../action/cartAction"
+import {
+  cartAction,
+  emptyCartAction,
+  loadingCartItem,
+} from "../action/cartAction"
 import CheckoutItem from "../components/CheckoutItem"
 
 const Checkout = ({ location, history, match }) => {
@@ -10,17 +14,22 @@ const Checkout = ({ location, history, match }) => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    id && dispatch(cartAction(id, qty))
-  }, [dispatch, id, qty])
-
   //React-router-dom Link open at the top of page
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [location.pathname])
 
-  const { cartItems } = useSelector((state) => state.cart)
+  const { cartItems, loading, deleteLoader } = useSelector(
+    (state) => state.cart
+  )
 
+  useEffect(() => {
+    id ? dispatch(cartAction(id, qty)) : dispatch(loadingCartItem(false, null))
+  }, [dispatch, id, qty])
+
+  const paymentHandler = () => {
+    history.push("/login?redirect=shipping")
+  }
   return (
     <section className="mt-6 mb-5">
       <div className="container bg-light shadow-box">
@@ -35,24 +44,55 @@ const Checkout = ({ location, history, match }) => {
               Shopping Cart
             </h3>
             <p className="mb-5 text-center font-size-4">
-              <i className="font-weight-bold">{cartItems.length}</i> item
+              <i className="font-weight-bold">
+                {cartItems.length
+                  ? cartItems.reduce(
+                      (accumulator, item) => accumulator + Number(item.qty),
+                      0
+                    )
+                  : "No"}
+              </i>{" "}
+              item
               {cartItems.length > 1 ? "s" : ""} in your cart
             </p>
           </div>
-          <CheckoutItem items={cartItems} />
+          <CheckoutItem
+            items={cartItems}
+            loading={loading}
+            deleteLoader={deleteLoader}
+          />
           <div className="col-lg-12 col-md-12 col-12">
             <div className="float-right text-right">
               <h4>Subtotal:</h4>
-              <h1>$99.00</h1>
+              <h2>
+                $
+                {cartItems.length > 0
+                  ? cartItems
+                      .reduce(
+                        (accumulator, item) =>
+                          accumulator + Number(item.qty) * Number(item.price),
+                        0
+                      )
+                      .toFixed(2)
+                  : "0.0"}
+              </h2>
             </div>
           </div>
 
           <div className="col-12 order-md-2 my-4 text-right">
             <div className="btn-group btn-group-lg">
-              <button type="button" className="btn btn-secondary">
+              <button
+                onClick={() => dispatch(emptyCartAction())}
+                type="button"
+                className="btn btn-secondary"
+              >
                 Empty Cart
               </button>
-              <button type="button" className="btn btn-dark">
+              <button
+                onClick={paymentHandler}
+                type="button"
+                className="btn btn-dark"
+              >
                 Pay Now
               </button>
             </div>

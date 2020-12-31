@@ -1,11 +1,16 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import { useSelector } from "react-redux"
+import React from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAction } from "../action/userAction";
 
 //import { SmileOutlined } from '@ant-design/icons';
 
 const Navbar = () => {
-  const { cartItems } = useSelector((state) => state.cart)
+  const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.userLogin);
+  const { cartItems } = useSelector((state) => state.cart);
+  console.log(userInfo);
   return (
     <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
       <Link to="/" className="navbar-brand ml-3" href="#">
@@ -72,15 +77,44 @@ const Navbar = () => {
               <i className="fas fa-lock-alt"></i> Register
             </Link>
           </li>
-          <li className="nav-item mr-4">
-            <Link to="/login" className="nav-link">
-              <i className="fas fa-unlock"></i> Login
-            </Link>
-          </li>
+          {userInfo ? (
+            <li className="nav-item dropdown mr-4">
+              <Link
+                to="/#"
+                className="nav-link dropdown-toggle"
+                id="navbarDropdownMenuLink-4"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <i className="fa fa-user"></i> {userInfo.name.split(" ")[0]}{" "}
+              </Link>
+              <div
+                className="dropdown-menu dropdown-menu-right dropdown-cyan"
+                aria-labelledby="navbarDropdownMenuLink-4"
+              >
+                <Link to="/#" className="dropdown-item">
+                  My account
+                </Link>
+                <button
+                  onClick={() => dispatch(logoutAction())}
+                  className="btn btn-link dropdown-item"
+                >
+                  Log out
+                </button>
+              </div>
+            </li>
+          ) : (
+            <li className="nav-item mr-4">
+              <Link to="/login" className="nav-link">
+                <i className="fas fa-unlock"></i> Login
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

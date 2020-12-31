@@ -1,21 +1,28 @@
-import React, { useState } from "react"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
-import LoadingBar from "react-top-loading-bar"
-import Navbar from "./components/Navbar"
-import Landing from "./pages/Landing"
-import Checkout from "./pages/Checkout"
-import ContactUs from "./pages/ContactUs"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
-import Pricing from "./pages/Pricing"
-import Help from "./pages/Help"
-import NotFound from "./pages/NotFound"
-import ProductDetails from "./pages/ProductDetails"
-import ForgotPassword from "./pages/ForgotPassword"
-import Footer from "./components/Footer"
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import LoadingBar from "react-top-loading-bar";
+import { useSelector } from "react-redux";
+import Navbar from "./components/Navbar";
+import Landing from "./pages/Landing";
+import Checkout from "./pages/Checkout";
+import ContactUs from "./pages/ContactUs";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Pricing from "./pages/Pricing";
+import Help from "./pages/Help";
+import NotFound from "./pages/NotFound";
+import ProductDetails from "./pages/ProductDetails";
+import ForgotPassword from "./pages/ForgotPassword";
+import Footer from "./components/Footer";
 
 function App() {
-  const [progress, setProgress] = useState(70)
+  const [progress, setProgress] = useState(0);
+  const value = useSelector((state) => state.progressBar);
+
+  useEffect(() => {
+    setProgress(value);
+  }, [value]);
+
   return (
     <Router>
       {/* //react-top-loading-bar */}
@@ -23,7 +30,7 @@ function App() {
         color="red"
         height={4}
         progress={progress}
-        onLoaderFinished={() => setProgress(0)}
+        onLoaderFinished={() => progress && setProgress(0)}
       />
       <Navbar />
       <Switch>
@@ -40,7 +47,7 @@ function App() {
       </Switch>
       <Footer />
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

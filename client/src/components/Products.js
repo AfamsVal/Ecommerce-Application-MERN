@@ -97,7 +97,7 @@ const Products = ({ error, loading, products }) => {
                         className="btn btn-outline-secondary btn-sm"
                         onClick={() =>
                           !countInStock
-                            ? openNotification("bottomLeft")
+                            ? openNotification("bottomRight")
                             : dispatch(cartAction(_id, 1))
                         }
                       >

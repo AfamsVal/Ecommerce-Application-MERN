@@ -111,7 +111,7 @@ body {
 .login-form {
   min-width: 300px;
   max-width: 400px;
-  margin: 180px auto;
+  margin: 150px auto;
   font-size: 15px;
 }
 
@@ -240,9 +240,9 @@ new login here */
 }
 
 .register-photo form .form-control {
-  background: #f7f9fc;
+  background: #f7e9ec;
   border: none;
-  border-bottom: 1px solid #dfe7f1;
+  border-bottom: 1px solid #dde7d1;
   border-radius: 0;
   box-shadow: none;
   outline: none;

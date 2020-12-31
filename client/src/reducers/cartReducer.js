@@ -1,10 +1,14 @@
 import {
   CART_ADD_ITEM,
-  //CART_REMOVE_ITEM
+  CART_EMPTY_ITEM,
+  CART_LOADING_ITEM,
+  CART_LOADING_DEL_ITEM,
+  CART_REMOVE_ITEM,
 } from "../constant/cartConstant"
 
 const initialState = {
   cartItems: [],
+  loading: true,
 }
 
 const cartReducer = (state = initialState, action) => {
@@ -25,6 +29,29 @@ const cartReducer = (state = initialState, action) => {
           ...state,
           cartItems: [...state.cartItems, item],
         }
+      }
+    case CART_EMPTY_ITEM:
+      return {
+        ...state,
+        cartItems: action.payload,
+      }
+    case CART_LOADING_ITEM:
+      return {
+        ...state,
+        loading: action.payload,
+      }
+    case CART_REMOVE_ITEM:
+      const cartItems = state.cartItems
+      const id = action.payload
+      const items = cartItems.filter((cart) => cart.product !== id)
+      return {
+        ...state,
+        cartItems: items,
+      }
+    case CART_LOADING_DEL_ITEM:
+      return {
+        ...state,
+        deleteLoader: action.payload,
       }
 
     default:
