@@ -71,6 +71,9 @@ body {
 .text-gray {
   color: #666;
 }
+.text-grayer {
+  color: #999;
+}
 .bg-gray {
   background-color: #dddddd;
 }
@@ -226,6 +229,9 @@ new login here */
   padding: 40px 60px;
   color: #505e6c;
 }
+.resize-none{
+  resize: none;
+}
 
 @media (max-width: 991px) {
   .register-photo form {
@@ -267,3 +273,5 @@ dropdown {
 .pay-btn {
   padding: 15px 45px;
 }
+
+.not-allowed {cursor: not-allowed;}

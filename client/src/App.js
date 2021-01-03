@@ -3,18 +3,19 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
-import Landing from "./pages/Landing";
-import Checkout from "./pages/Checkout";
-import ContactUs from "./pages/ContactUs";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Pricing from "./pages/Pricing";
-import Help from "./pages/Help";
-import NotFound from "./pages/NotFound";
-import ProductDetails from "./pages/ProductDetails";
-import ForgotPassword from "./pages/ForgotPassword";
+import LandingScreen from "./screens/LandingScreen";
+import CheckoutScreen from "./screens/CheckoutScreen";
+import ContactUsScreen from "./screens/ContactUsScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import PricingScreen from "./screens/PricingScreen";
+import HelpScreen from "./screens/HelpScreen";
+import NotFoundScreen from "./screens/NotFoundScreen";
+import ProductDetailsScreen from "./screens/ProductDetailsScreen";
+import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import Footer from "./components/Footer";
-import Profile from "./pages/Profile";
+import ProfileScreen from "./screens/ProfileScreen";
+import ShippingScreen from "./screens/ShippingScreen";
 
 function App() {
   const [progress, setProgress] = useState(0);
@@ -35,17 +36,22 @@ function App() {
       />
       <Navbar />
       <Switch>
-        <Route path="/" exact component={Landing} />
-        <Route path="/checkout/:id?" exact component={Checkout} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/register" exact component={Register} />
-        <Route path="/contact-us" exact component={ContactUs} />
-        <Route path="/profile" exact component={Profile} />
-        <Route path="/pricing" exact component={Pricing} />
-        <Route path="/product-details/:id" exact component={ProductDetails} />
-        <Route path="/help" exact component={Help} />
-        <Route path="/forgot-password" exact component={ForgotPassword} />
-        <Route path="*" component={NotFound} />
+        <Route path="/" exact component={LandingScreen} />
+        <Route path="/checkout/:id?" exact component={CheckoutScreen} />
+        <Route path="/login" exact component={LoginScreen} />
+        <Route path="/register" exact component={RegisterScreen} />
+        <Route path="/contact-us" exact component={ContactUsScreen} />
+        <Route path="/profile" exact component={ProfileScreen} />
+        <Route path="/pricing" exact component={PricingScreen} />
+        <Route path="/shipping" exact component={ShippingScreen} />
+        <Route
+          path="/product-details/:id"
+          exact
+          component={ProductDetailsScreen}
+        />
+        <Route path="/help" exact component={HelpScreen} />
+        <Route path="/forgot-password" exact component={ForgotPasswordScreen} />
+        <Route path="*" component={NotFoundScreen} />
       </Switch>
       <Footer />
     </Router>
