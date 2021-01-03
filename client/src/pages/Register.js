@@ -5,11 +5,8 @@ import { registerAction } from "../action/userAction";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const { error, loading, userInfo } = useSelector(
-    (state) => state.userRegister
-  );
-  const [alert, setAlert] = useState(false);
-  console.log("user:" + userInfo);
+  const { error, loading } = useSelector((state) => state.userRegister);
+  const [alert, setAlert] = useState(true);
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -23,8 +20,8 @@ const Checkout = () => {
     e.preventDefault();
     const password = password1;
     dispatch(registerAction(name, email, password));
-    setAlert(true);
     setUser({ name: "", email: "", password1: "", password2: "" });
+    setAlert(true);
   };
 
   //FILL UP INPUT

@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import ProductDetails from "./pages/ProductDetails";
 import ForgotPassword from "./pages/ForgotPassword";
 import Footer from "./components/Footer";
+import Profile from "./pages/Profile";
 
 function App() {
   const [progress, setProgress] = useState(0);
@@ -39,6 +40,7 @@ function App() {
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
         <Route path="/contact-us" exact component={ContactUs} />
+        <Route path="/profile" exact component={Profile} />
         <Route path="/pricing" exact component={Pricing} />
         <Route path="/product-details/:id" exact component={ProductDetails} />
         <Route path="/help" exact component={Help} />

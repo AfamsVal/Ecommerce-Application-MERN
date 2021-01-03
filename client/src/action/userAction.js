@@ -10,6 +10,9 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
   USER_DETAILS_FAIL,
+  USER_UPDATE_PROFILE_REQUEST,
+  USER_UPDATE_PROFILE_FAIL,
+  USER_UPDATE_PROFILE_SUCCESS,
 } from "../constant/userConstant";
 import { progressAction } from "./progressBarAction";
 
@@ -71,7 +74,7 @@ export const registerAction = (name, email, password) => async (dispatch) => {
 
 //this function is managing to different actions depending on the screen you are////
 ///////////////////////////////////////////////////////////////////////////////////
-export const getUserDetails = (screen) => async (dispatch, getState) => {
+export const getUserDetailsAction = (screen) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_DETAILS_REQUEST });
     const {
@@ -82,7 +85,7 @@ export const getUserDetails = (screen) => async (dispatch, getState) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
-        authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     };
     const { data } = await axios.get(`/api/users/${screen}`, config);
@@ -90,6 +93,36 @@ export const getUserDetails = (screen) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const userUpdateProfileAction = (userObj) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
+    const {
+      userLogin: {
+        userInfo: { token },
+      },
+    } = getState();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const { data } = await axios.put("/api/users/profile", userObj, config);
+    dispatch({ type: USER_UPDATE_PROFILE_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_PROFILE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

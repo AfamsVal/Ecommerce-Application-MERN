@@ -10,7 +10,6 @@ const Navbar = () => {
 
   const { userInfo } = useSelector((state) => state.userLogin);
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(userInfo);
   return (
     <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
       <Link to="/" className="navbar-brand ml-3" href="#">
@@ -93,8 +92,8 @@ const Navbar = () => {
                 className="dropdown-menu dropdown-menu-right dropdown-cyan"
                 aria-labelledby="navbarDropdownMenuLink-4"
               >
-                <Link to="/#" className="dropdown-item">
-                  My account
+                <Link to="/profile" className="dropdown-item">
+                  My Profile
                 </Link>
                 <button
                   onClick={() => dispatch(logoutAction())}

@@ -17,14 +17,13 @@ const Checkout = ({ location, history }) => {
   }, [history, redirect, userInfo]);
 
   const [user, setUser] = useState({ email: "", password: "" });
-  const [alert, setAlert] = useState(false);
+  const [alert, setAlert] = useState(true);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(progressAction(40));
     dispatch(loginAction(user.email, user.password));
     setAlert(true);
-    setUser({ email: "", password1: "" });
   };
 
   return (
