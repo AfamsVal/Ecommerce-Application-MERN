@@ -42,7 +42,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item mr-4">
             <Link to="/pricing" className="nav-link">
-              <i className="fa fa-certificate"></i> Pricing
+              <i className="fab fa-paypal"></i> Pricing
             </Link>
           </li>
           <li className="nav-item">
@@ -73,7 +73,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item mr-4">
             <Link to="/register" className="nav-link">
-              <i className="fas fa-lock-alt"></i> Register
+              <i className="fas fa-unlock-alt"></i> Register
             </Link>
           </li>
           {userInfo ? (
@@ -86,7 +86,7 @@ const Navbar = () => {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <i className="fa fa-user"></i> {userInfo.name.split(" ")[0]}{" "}
+                <i className="fas fa-user"></i> {userInfo.name.split(" ")[0]}{" "}
               </Link>
               <div
                 className="dropdown-menu dropdown-menu-right dropdown-cyan"
