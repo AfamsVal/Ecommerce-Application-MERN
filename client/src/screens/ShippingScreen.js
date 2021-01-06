@@ -5,10 +5,14 @@ import { saveShippingAddress } from "../action/cartAction";
 import CheckoutSteps from "../components/CheckoutSteps";
 
 //React-router-dom Link open at the top of page
-const ContactUs = ({ history }) => {
+const ShippingScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { error, shippingAddress } = useSelector(({ cart }) => cart);
+
+  const cartItems = useSelector(({ cart }) => cart.cartItems);
+
   useEffect(() => {
+    if (cartItems.length === 0) history.push("/");
     window.scrollTo(0, 0);
   });
   const [alert, setAlert] = useState(true);
@@ -142,4 +146,4 @@ const ContactUs = ({ history }) => {
   );
 };
 
-export default ContactUs;
+export default ShippingScreen;

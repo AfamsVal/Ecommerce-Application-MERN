@@ -1,35 +1,35 @@
-import React, { useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   cartAction,
   emptyCartAction,
   loadingCartItem,
-} from "../action/cartAction"
-import CheckoutItem from "../components/CheckoutItem"
+} from "../action/cartAction";
+import CheckoutItem from "../components/CheckoutItem";
 
 const Checkout = ({ location, history, match }) => {
-  const id = match.params.id ? match.params.id : ""
-  const qty = location.search ? Number(location.search.split("=")[1]) : 1
+  const id = match.params.id ? match.params.id : "";
+  const qty = location.search ? Number(location.search.split("=")[1]) : 1;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   //React-router-dom Link open at the top of page
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location.pathname])
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const { cartItems, loading, deleteLoader } = useSelector(
     (state) => state.cart
-  )
+  );
 
   useEffect(() => {
-    id ? dispatch(cartAction(id, qty)) : dispatch(loadingCartItem(false, null))
-  }, [dispatch, id, qty])
+    id ? dispatch(cartAction(id, qty)) : dispatch(loadingCartItem(false, null));
+  }, [dispatch, id, qty]);
 
   const paymentHandler = () => {
-    history.push("/login?redirect=shipping")
-  }
+    history.push("/login?redirect=shipping");
+  };
   return (
     <section className="mt-6 mb-5">
       <div className="container bg-light shadow-box">
@@ -91,7 +91,10 @@ const Checkout = ({ location, history, match }) => {
               <button
                 onClick={paymentHandler}
                 type="button"
-                className="btn btn-dark"
+                className={`btn btn-dark ${
+                  cartItems.length === 0 ? "not-allowed" : ""
+                }`}
+                disabled={cartItems.length === 0}
               >
                 Pay Now
               </button>
@@ -100,7 +103,7 @@ const Checkout = ({ location, history, match }) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Checkout
+export default Checkout;
