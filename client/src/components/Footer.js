@@ -1,8 +1,8 @@
-import React from "react"
-import { Link, useLocation } from "react-router-dom"
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const Footer = () => {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
 
   return (
     <footer className="footer bg-dark pb-3 pt-1">
@@ -12,9 +12,9 @@ const Footer = () => {
             <h5 className=" pt2 text-light mt-4 mb-3">Afams Shop</h5>
 
             <p className="line-height-24">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
+              Cheap delivery on millions of low priced items across African
+              biggest selection of electronics & accessories, wears, jewelry,
+              groceries & many more.
             </p>
           </div>
 
@@ -74,7 +74,7 @@ const Footer = () => {
         </p>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
