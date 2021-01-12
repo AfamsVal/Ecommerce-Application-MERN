@@ -1,5 +1,5 @@
-import mongoose from "mongoose"
-const Schema = mongoose.Schema
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema({
   user: { type: Schema.Types.ObjectId, required: true, ref: "User" },
@@ -15,7 +15,7 @@ const OrderSchema = new Schema({
   shippingAddress: {
     address: { type: String, required: true },
     city: { type: String, required: true },
-    postalCode: { type: String, required: true },
+    state: { type: String, required: true },
     country: { type: String, required: true },
   },
   paymentMethod: {
@@ -27,6 +27,11 @@ const OrderSchema = new Schema({
     status: { type: String },
     update_time: { type: String },
     email_address: { type: String },
+  },
+  itemsPrice: {
+    type: Number,
+    required: true,
+    default: 0.0,
   },
   taxPrice: {
     type: Number,
@@ -59,8 +64,8 @@ const OrderSchema = new Schema({
   deliveredAt: {
     type: Date,
   },
-})
+});
 
-const Order = mongoose.model("Order", OrderSchema)
+const Order = mongoose.model("Order", OrderSchema);
 
-export default Order
+export default Order;
