@@ -15,6 +15,10 @@ app.use("/api/products", ProductRoute);
 app.use("/api/users/", userRoute);
 app.use("/api/order/", orderRoute);
 
+app.get("/api/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
+
 //Manage wrong URL
 //////////////////////////////
 app.use((req, res, next) => {

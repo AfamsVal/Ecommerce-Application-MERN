@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from "react"
-import Rating from "../components/Rating"
-import { useSelector, useDispatch } from "react-redux"
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
-import { productDetailsReducer } from "../action/productActions"
+import React, { useState, useEffect } from "react";
+import Rating from "../components/Rating";
+import { useSelector, useDispatch } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { productDetailsReducer } from "../action/productActions";
+import errorImg from "../images/error.gif";
 
 const ProductDetails = (props) => {
-  const { goBack } = props.history
-  const { id } = props.match.params
+  const { goBack } = props.history;
+  const { id } = props.match.params;
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const { product, error, loading } = useSelector(
     ({ productDetails }) => productDetails
-  )
+  );
   const {
     description,
     category,
@@ -22,30 +23,41 @@ const ProductDetails = (props) => {
     rating,
     numReviews,
     countInStock,
-  } = product
+  } = product;
 
   // console.log([...Array(countInStock).keys()])
 
-  const [qty, setQty] = useState(1)
+  const [qty, setQty] = useState(1);
 
   useEffect(() => {
-    dispatch(productDetailsReducer(id))
-  }, [dispatch, id])
+    dispatch(productDetailsReducer(id));
+  }, [dispatch, id]);
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  })
+    window.scrollTo(0, 0);
+  });
 
   const addCartHandle = (e) => {
-    e.preventDefault()
-    props.history.push(`/checkout/${id}?qty=${qty}`)
-  }
+    e.preventDefault();
+    props.history.push(`/checkout/${id}?qty=${qty}`);
+  };
 
   return error ? (
-    <div className="col-12 mt-5">
-      <h1 className="py-5 text-center text-danger">
-        <i className="fa fa-info-circle"></i> {error}
-      </h1>
+    <div className="container mt-6 mb-2">
+      <div className="row mb-5">
+        <div className="col-6 offset-3 col-md-4 offset-md-4 col-lg-4 offset-lg-4 mt-3">
+          <img
+            className="img-fluid text-center"
+            src={errorImg}
+            alt="Not Found"
+          />
+        </div>
+        <div className="col-12">
+          <h1 className="pb-5 text-center text-danger">
+            <i className="fa fa-info-circle"></i> {error}
+          </h1>
+        </div>
+      </div>
     </div>
   ) : loading ? (
     <div className="container mt-6 mb-2">
@@ -144,7 +156,7 @@ const ProductDetails = (props) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ProductDetails
+export default ProductDetails;

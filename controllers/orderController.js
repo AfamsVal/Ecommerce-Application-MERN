@@ -3,7 +3,7 @@ import Order from "../Models/OrderModel.js";
 import orderModel from "../Models/OrderModel.js";
 
 //@desc add new order to database
-//@route /api/order/add
+//@route POST: /api/order
 //@access private
 const addOrderItem = asyncHandler(async (req, res) => {
   const {
@@ -39,7 +39,7 @@ const addOrderItem = asyncHandler(async (req, res) => {
 });
 
 //@desc Get Order by ID
-//@route /api/order:add
+//@route GET: /api/order/:id
 //@access private
 const getOrderById = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id).populate(
@@ -55,4 +55,27 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 });
 
-export { addOrderItem, getOrderById };
+//@desc Update Order to Paid
+//@route PUT: /api/order/:id/pay
+//@access private
+const updateOrderToPaid = asyncHandler(async (req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address,
+    };
+    const updatedOrder = await order.save();
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error("Order not found");
+  }
+});
+
+export { addOrderItem, getOrderById, updateOrderToPaid };

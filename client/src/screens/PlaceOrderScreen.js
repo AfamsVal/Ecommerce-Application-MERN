@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { createOrderAction } from "../action/orderAction";
 
-const ProductDetails = ({ history }) => {
+const PlaceOrderScreen = ({ history }) => {
   const [alert, setAlert] = useState(true);
 
   const dispatch = useDispatch();
@@ -75,7 +75,7 @@ const ProductDetails = ({ history }) => {
               </address>
               <hr />
               <h5 className="text-uppercase font-weight-bold">
-                Payment Method
+                Payment Details
               </h5>
               <address>
                 <span className="font-weight-bold">Method:</span>{" "}
@@ -188,4 +188,4 @@ const ProductDetails = ({ history }) => {
   );
 };
 
-export default ProductDetails;
+export default PlaceOrderScreen;
