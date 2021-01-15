@@ -82,13 +82,16 @@ export const getUserDetailsAction = (screen) => async (dispatch, getState) => {
         userInfo: { token },
       },
     } = getState();
+
     const config = {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     };
+
     const { data } = await axios.get(`/api/users/${screen}`, config);
+
     dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({

@@ -17,6 +17,8 @@ import Footer from "./components/Footer";
 import ProfileScreen from "./screens/ProfileScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import OrderScreen from "./screens/OrderScreen";
 
 function App() {
   const [progress, setProgress] = useState(0);
@@ -46,6 +48,8 @@ function App() {
         <Route path="/pricing" exact component={PricingScreen} />
         <Route path="/shipping" exact component={ShippingScreen} />
         <Route path="/payment" exact component={PaymentScreen} />
+        <Route path="/place-order" exact component={PlaceOrderScreen} />
+        <Route path="/order/:id" exact component={OrderScreen} />
         <Route
           path="/product-details/:id"
           exact

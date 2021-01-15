@@ -52,9 +52,9 @@ const ShippingScreen = ({ history }) => {
           <Link to="/contact-us">contact us</Link>.
         </p>
         <div className="row mx-auto">
-          <div className="col-sm-12 col-md-6 offset-md-3 mb-5 mt-4">
+          <div className="col-sm-12 col-md-8 offset-md-2 mb-5 mt-4">
             <div className="card border-0 w-100 contact-us">
-              <div className="card-body text-center w-100">
+              <div className="card-body text-center w-100 px-4">
                 <form onSubmit={handleSubmit}>
                   <h2 className="text-center">
                     <strong>Shipping</strong> Details
@@ -73,7 +73,7 @@ const ShippingScreen = ({ history }) => {
                   )}
                   <div className="form-group">
                     <input
-                      className="form-control"
+                      className="form-control rounded-0  border-top-0  border-left-0  border-right-0 shadow-none px-0"
                       type="name"
                       name="phone"
                       value={phone}
@@ -83,9 +83,9 @@ const ShippingScreen = ({ history }) => {
                   </div>
                   <div className="form-group">
                     <textarea
-                      className="form-control resize-none"
-                      id="exampleFormControlTextarea1"
-                      rows="3"
+                      className="form-control resize-none rounded-0 border-top-0  border-left-0  border-right-0 shadow-none  px-0"
+                      id="exampleFormControlTextarea1 bordered"
+                      rows="2"
                       name="address"
                       value={address}
                       onChange={handleChange}
@@ -94,7 +94,7 @@ const ShippingScreen = ({ history }) => {
                   </div>
                   <div className="form-group">
                     <input
-                      className="form-control"
+                      className="form-control rounded-0  border-top-0  border-left-0  border-right-0 shadow-none  px-0"
                       type="name"
                       name="city"
                       value={city}
@@ -104,7 +104,7 @@ const ShippingScreen = ({ history }) => {
                   </div>
                   <div className="form-group">
                     <input
-                      className="form-control"
+                      className="form-control rounded-0  border-top-0  border-left-0  border-right-0 shadow-none  px-0"
                       type="text"
                       name="state"
                       value={state}
@@ -114,7 +114,7 @@ const ShippingScreen = ({ history }) => {
                   </div>
                   <div className="form-group">
                     <input
-                      className="form-control"
+                      className="form-control rounded-0  border-top-0  border-left-0  border-right-0 shadow-none  px-0"
                       type="text"
                       name="country"
                       value={country}

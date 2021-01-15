@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 import ProductRoute from "./route_api/productRoute.js";
 import userRoute from "./route_api/userRoute.js";
+import orderRoute from "./route_api/orderRoute.js";
 
 dotenv.config();
 
@@ -12,6 +13,11 @@ app.use(express.json());
 
 app.use("/api/products", ProductRoute);
 app.use("/api/users/", userRoute);
+app.use("/api/order/", orderRoute);
+
+app.get("/api/config/paypal", (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+);
 
 //Manage wrong URL
 //////////////////////////////

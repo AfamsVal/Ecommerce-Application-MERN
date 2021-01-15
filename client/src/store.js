@@ -10,7 +10,13 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from "./reducers/userReducer";
+
 import { progressBarReducer } from "./reducers/progressBarReducer";
+import {
+  createdOrderReducer,
+  orderDetailsReducer,
+  orderPayReducer,
+} from "./reducers/orderReducers";
 
 const reducer = combineReducers({
   productList: productListReducer,
@@ -21,6 +27,9 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  createOrder: createdOrderReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
 });
 
 const loadCartItem = localStorage.getItem("cartItems")
@@ -35,12 +44,17 @@ const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
   ? JSON.parse(localStorage.getItem("shippingAddress"))
   : {};
 
+const paymentMethod = localStorage.getItem("paymentMethod")
+  ? JSON.parse(localStorage.getItem("paymentMethod"))
+  : "";
+
 const initialState = {
   cart: {
     cartItems: loadCartItem,
     loading: true,
     deleteLoader: false,
     shippingAddress: shippingAddressFromStorage,
+    paymentMethod,
   },
   userLogin: { userInfo: userInfoFromStorage },
 };

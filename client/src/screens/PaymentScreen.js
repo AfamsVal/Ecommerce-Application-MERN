@@ -11,7 +11,7 @@ const PaymentScreen = ({ history }) => {
 
   useEffect(() => {
     if (Object.entries(cartItems).length === 0) return history.push("/");
-    if (Object.entries(shippingAddress).length === 0) history.push("/shipping");
+    if (Object.keys(shippingAddress).length === 0) history.push("/shipping");
 
     window.scrollTo(0, 0);
   });
@@ -23,8 +23,9 @@ const PaymentScreen = ({ history }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(savePaymentMethod(paymentMethod));
+    console.log(paymentMethod);
     //setAlert(true);
-    history.push("/payment");
+    history.push("/place-order");
   };
 
   return (
