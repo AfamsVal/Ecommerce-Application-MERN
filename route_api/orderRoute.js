@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 import {
   addOrderItem,
+  getMyOrders,
   getOrderById,
   updateOrderToPaid,
 } from "../controllers/orderController.js";
@@ -11,6 +12,7 @@ import { protect } from "../middleware/authMiddleware.js";
 //@route /api/order/add
 //@access private
 router.route("/").post(protect, addOrderItem);
+router.route("/myorders").get(protect, getMyOrders);
 router.route("/:id").get(protect, getOrderById);
 router.route("/:id/pay").put(protect, updateOrderToPaid);
 

@@ -64,6 +64,9 @@ const OrderSchema = new Schema({
   deliveredAt: {
     type: Date,
   },
+  createdAt: {
+    type: Date,
+  },
 });
 
 const Order = mongoose.model("Order", OrderSchema);

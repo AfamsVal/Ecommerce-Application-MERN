@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ORDER_LIST_MY_RESET } from "../constant/orderConstant";
 import {
   USER_LOGIN_FAIL,
   USER_LOGIN_REQUEST,
@@ -13,6 +14,7 @@ import {
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_FAIL,
   USER_UPDATE_PROFILE_SUCCESS,
+  USER_DETAILS_RESET,
 } from "../constant/userConstant";
 import { progressAction } from "./progressBarAction";
 
@@ -136,5 +138,7 @@ export const userUpdateProfileAction = (userObj) => async (
 
 export const logoutAction = () => (dispatch) => {
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_LIST_MY_RESET });
   localStorage.removeItem("userInfo");
 };

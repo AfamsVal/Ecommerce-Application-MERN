@@ -15,6 +15,7 @@ import { progressBarReducer } from "./reducers/progressBarReducer";
 import {
   createdOrderReducer,
   orderDetailsReducer,
+  orderListMyReducer,
   orderPayReducer,
 } from "./reducers/orderReducers";
 
@@ -30,6 +31,7 @@ const reducer = combineReducers({
   createOrder: createdOrderReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
+  orderListMy: orderListMyReducer,
 });
 
 const loadCartItem = localStorage.getItem("cartItems")
