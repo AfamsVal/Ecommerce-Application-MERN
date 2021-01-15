@@ -78,8 +78,8 @@ const Navbar = () => {
           </li>
           {userInfo ? (
             <li className="nav-item dropdown mr-4">
-              <Link
-                to="/#"
+              <a
+                href="/#"
                 className="nav-link dropdown-toggle"
                 id="navbarDropdownMenuLink-4"
                 data-toggle="dropdown"
@@ -87,7 +87,7 @@ const Navbar = () => {
                 aria-expanded="false"
               >
                 <i className="fas fa-user"></i> {userInfo.name.split(" ")[0]}{" "}
-              </Link>
+              </a>
               <div
                 className="dropdown-menu dropdown-menu-right dropdown-cyan"
                 aria-labelledby="navbarDropdownMenuLink-4"
