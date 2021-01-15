@@ -13,6 +13,7 @@ import {
   ORDER_LIST_MY_FAIL,
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_RESET,
+  ORDER_CREATE_RESET,
 } from "../constant/orderConstant";
 
 const createdOrderReducer = (state = { success: false }, action) => {
@@ -35,6 +36,9 @@ const createdOrderReducer = (state = { success: false }, action) => {
         loading: false,
         error: action.payload,
       };
+    case ORDER_CREATE_RESET:
+      localStorage.removeItem("cartItems");
+      return { success: false };
     default:
       return state;
   }
