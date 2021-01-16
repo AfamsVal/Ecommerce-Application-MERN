@@ -16,6 +16,10 @@ const Navbar = () => {
     setCount(cartItems.length);
   }, [cartItems]);
 
+  const logoutHandle = (useHistory) => {
+    dispatch(logoutAction());
+  };
+
   return (
     <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
       <Link to="/" className="navbar-brand ml-3" href="#">
@@ -80,6 +84,7 @@ const Navbar = () => {
               <i className="fas fa-unlock-alt"></i> Register
             </Link>
           </li>
+
           {userInfo ? (
             <li className="nav-item dropdown mr-4">
               <a
@@ -99,8 +104,21 @@ const Navbar = () => {
                 <Link to="/profile" className="dropdown-item">
                   My Profile
                 </Link>
+                {userInfo && userInfo.isAdmin && (
+                  <>
+                    <Link to="/admin/users" className="dropdown-item">
+                      Users
+                    </Link>
+                    <Link to="/admin/products" className="dropdown-item">
+                      Products
+                    </Link>
+                    <Link to="/admin/orders" className="dropdown-item">
+                      Orders
+                    </Link>
+                  </>
+                )}
                 <button
-                  onClick={() => dispatch(logoutAction())}
+                  onClick={logoutHandle}
                   className="btn btn-link dropdown-item"
                 >
                   Log out

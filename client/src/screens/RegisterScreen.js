@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../action/userAction";
+import { USER_REGISTER_RESET } from "../constant/userConstant";
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ location, history }) => {
   const dispatch = useDispatch();
-  const { error, loading } = useSelector((state) => state.userRegister);
+  const { error, loading, success } = useSelector(
+    (state) => state.userRegister
+  );
   const [alert, setAlert] = useState(true);
   const [user, setUser] = useState({
     name: "",
@@ -13,6 +16,14 @@ const RegisterScreen = () => {
     password1: "",
     password2: "",
   });
+
+  useEffect(() => {
+    if (success) {
+      dispatch({ type: USER_REGISTER_RESET });
+      history.push("/");
+    }
+  }, [success, history, dispatch]);
+
   const { name, email, password1, password2 } = user;
 
   //REGISTER NEW USER
@@ -120,7 +131,7 @@ const RegisterScreen = () => {
                 {loading ? (
                   <div className="spinner-border spinner-border-sm"></div>
                 ) : (
-                  <i class="fas fa-plus"></i>
+                  <i className="fas fa-plus"></i>
                 )}{" "}
                 Register
               </button>
