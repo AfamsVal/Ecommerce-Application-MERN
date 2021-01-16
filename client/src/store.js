@@ -9,6 +9,8 @@ import {
   userRegisterReducer,
   userDetailsReducer,
   userUpdateProfileReducer,
+  userListReducer,
+  userDeleteReducer,
 } from "./reducers/userReducer";
 
 import { progressBarReducer } from "./reducers/progressBarReducer";
@@ -32,6 +34,8 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderListMy: orderListMyReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
 });
 
 const loadCartItem = localStorage.getItem("cartItems")

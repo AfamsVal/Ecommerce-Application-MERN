@@ -19,6 +19,7 @@ import ShippingScreen from "./screens/ShippingScreen";
 import PaymentScreen from "./screens/PaymentScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import OrderScreen from "./screens/OrderScreen";
+import UserListScreen from "./screens/UserListScreen";
 
 function App() {
   const [progress, setProgress] = useState(0);
@@ -57,6 +58,7 @@ function App() {
         />
         <Route path="/help" exact component={HelpScreen} />
         <Route path="/forgot-password" exact component={ForgotPasswordScreen} />
+        <Route path="/admin/users" exact component={UserListScreen} />
         <Route path="*" component={NotFoundScreen} />
       </Switch>
       <Footer />

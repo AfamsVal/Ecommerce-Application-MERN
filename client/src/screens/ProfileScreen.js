@@ -202,7 +202,7 @@ const Profile = ({ history }) => {
             </div>
             <div className="col-12">
               <h1 className="pb-5 text-center text-danger">
-                <i className="fa fa-info-circle"></i> {error}
+                <i className="fa fa-info-circle"></i> {orderError}
               </h1>
             </div>
           </div>

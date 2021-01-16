@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../action/userAction";
@@ -7,9 +7,19 @@ import { logoutAction } from "../action/userAction";
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const [count, setCount] = useState(0);
 
   const { userInfo } = useSelector((state) => state.userLogin);
   const { cartItems } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    setCount(cartItems.length);
+  }, [cartItems]);
+
+  const logoutHandle = (useHistory) => {
+    dispatch(logoutAction());
+  };
+
   return (
     <nav className="navbar navbar-expand-md bg-dark navbar-dark fixed-top">
       <Link to="/" className="navbar-brand ml-3" href="#">
@@ -61,11 +71,9 @@ const Navbar = () => {
           <li className="nav-item mr-4">
             <Link to="/checkout" className="nav-link" href="#">
               <i className="fas fa-shopping-cart">
-                {cartItems.length !== 0 && (
+                {count !== 0 && (
                   <sup className="font-size-2 text-danger g-font">
-                    <span className="badge badge-danger">
-                      {cartItems.length}
-                    </span>
+                    <span className="badge badge-danger">{count}</span>
                   </sup>
                 )}
               </i>
@@ -76,6 +84,7 @@ const Navbar = () => {
               <i className="fas fa-unlock-alt"></i> Register
             </Link>
           </li>
+
           {userInfo ? (
             <li className="nav-item dropdown mr-4">
               <a
@@ -95,8 +104,21 @@ const Navbar = () => {
                 <Link to="/profile" className="dropdown-item">
                   My Profile
                 </Link>
+                {userInfo && userInfo.isAdmin && (
+                  <>
+                    <Link to="/admin/users" className="dropdown-item">
+                      Users
+                    </Link>
+                    <Link to="/admin/products" className="dropdown-item">
+                      Products
+                    </Link>
+                    <Link to="/admin/orders" className="dropdown-item">
+                      Orders
+                    </Link>
+                  </>
+                )}
                 <button
-                  onClick={() => dispatch(logoutAction())}
+                  onClick={logoutHandle}
                   className="btn btn-link dropdown-item"
                 >
                   Log out

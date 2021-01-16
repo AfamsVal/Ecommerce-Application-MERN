@@ -12,7 +12,9 @@ import {
   ORDER_LIST_MY_FAIL,
   ORDER_LIST_MY_REQUEST,
   ORDER_LIST_MY_SUCCESS,
+  ORDER_CREATE_RESET,
 } from "../constant/orderConstant";
+import { emptyCartAction } from "./cartAction";
 
 export const createOrderAction = (order) => async (dispatch, getState) => {
   try {
@@ -95,6 +97,8 @@ export const orderPayAction = (orderId, paymentResult) => async (
     );
 
     dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
+    dispatch({ type: ORDER_CREATE_RESET });
+    dispatch(emptyCartAction());
   } catch (error) {
     dispatch({
       type: ORDER_PAY_FAIL,
