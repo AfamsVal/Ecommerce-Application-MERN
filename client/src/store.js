@@ -11,6 +11,7 @@ import {
   userUpdateProfileReducer,
   userListReducer,
   userDeleteReducer,
+  updateUserAdminReducer,
 } from "./reducers/userReducer";
 
 import { progressBarReducer } from "./reducers/progressBarReducer";
@@ -36,6 +37,7 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
+  updateUserAdmin: updateUserAdminReducer,
 });
 
 const loadCartItem = localStorage.getItem("cartItems")
