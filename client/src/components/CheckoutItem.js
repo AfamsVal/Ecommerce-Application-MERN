@@ -1,14 +1,15 @@
-import React from "react"
-import { useDispatch } from "react-redux"
-import { cartAction, deleteCartAction } from "../action/cartAction"
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
+import React from "react";
+import { useDispatch } from "react-redux";
+import { cartAction, deleteCartAction } from "../action/cartAction";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { formatNumber } from "../utils/numberFormatter";
 
 const CheckoutItem = ({ items, loading, deleteLoader }) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const deleteItemHandle = (id) => {
-    dispatch(deleteCartAction(id))
-  }
+    dispatch(deleteCartAction(id));
+  };
 
   return loading ? (
     <>
@@ -51,7 +52,7 @@ const CheckoutItem = ({ items, loading, deleteLoader }) => {
           <div className="col-12 col-sm-6">
             <h4 className="font-weight-bold">{item.name}</h4>
             <h5>{item.category}</h5>
-            <h4 className="font-weight-bold">${item.price}</h4>
+            <h4 className="font-weight-bold">${formatNumber(item.price)}</h4>
           </div>
           <div className="col-6 col-sm-2">
             <select
@@ -93,7 +94,7 @@ const CheckoutItem = ({ items, loading, deleteLoader }) => {
         <i className="fa fa-shopping-cart"></i> Cart is Empty
       </h2>
     </div>
-  )
-}
+  );
+};
 
-export default CheckoutItem
+export default CheckoutItem;

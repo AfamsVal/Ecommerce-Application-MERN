@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react"
-import Carosel from "../components/Carosel"
-import Products from "../components/Products"
-import InputText from "../components/InputText"
-import { useSelector, useDispatch } from "react-redux"
-import { listProducts } from "../action/productActions"
+import React, { useState, useEffect } from "react";
+import Carosel from "../components/Carosel";
+import Products from "../components/Products";
+import InputText from "../components/InputText";
+import { useSelector, useDispatch } from "react-redux";
+import { listProductsAction } from "../action/productActions";
 
 const Landing = (props) => {
   const { error, loading, products } = useSelector(
     ({ productList }) => productList
-  )
-  const dispatch = useDispatch()
+  );
+  const dispatch = useDispatch();
 
-  const [input, setInput] = useState("")
+  const [input, setInput] = useState("");
 
   useEffect(() => {
-    dispatch(listProducts())
-  }, [dispatch])
+    dispatch(listProductsAction());
+  }, [dispatch]);
 
   // Scroll
-  const [myRef, setMyRef] = useState({ current: null })
+  const [myRef, setMyRef] = useState({ current: null });
 
   const scroll = (ref) => {
-    setMyRef({ ...myRef, ref })
-    myRef.current.scrollIntoView({ behavior: "smooth" })
-  }
+    setMyRef({ ...myRef, ref });
+    myRef.current.scrollIntoView({ behavior: "smooth" });
+  };
 
   // useEffect(() => {
   //   window.scrollTo(0, 0)
@@ -58,7 +58,7 @@ const Landing = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Landing
+export default Landing;

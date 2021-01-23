@@ -102,7 +102,7 @@ const PaymentScreen = ({ history }) => {
                       {/* {loading && (
                         <div className="spinner-border spinner-border-sm"></div>
                       )}{" "} */}
-                      Place Order
+                      Place Order <i class="fas fa-angle-double-right"></i>
                     </button>
                   </div>
                 </form>

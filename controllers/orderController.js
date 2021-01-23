@@ -1,6 +1,5 @@
 import asyncHandler from "express-async-handler";
 import Order from "../Models/OrderModel.js";
-import orderModel from "../Models/OrderModel.js";
 
 //@desc add new order to database
 //@route POST: /api/order
@@ -19,9 +18,8 @@ const addOrderItem = asyncHandler(async (req, res) => {
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No item in cart");
-    return;
   } else {
-    const order = orderModel({
+    const order = Order({
       orderItems,
       shippingAddress,
       paymentMethod,

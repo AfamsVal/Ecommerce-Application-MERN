@@ -84,7 +84,7 @@ const ModalBox = ({ userId }) => {
             {loading ? (
               <div className="spinner-border spinner-border-sm mr-1"></div>
             ) : (
-              <i class="fas fa-edit mr-1"></i>
+              <i className="fas fa-edit mr-1"></i>
             )}{" "}
             Update
           </Button>,

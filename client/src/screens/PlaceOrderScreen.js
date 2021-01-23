@@ -171,12 +171,10 @@ const PlaceOrderScreen = ({ history }) => {
                     className="btn btn-dark"
                     disabled={cartItems === 0}
                   >
-                    {loading ? (
+                    {loading && (
                       <div className="spinner-border spinner-border-sm"></div>
-                    ) : (
-                      <i className="fa fa-file-invoice"></i>
-                    )}{" "}
-                    Place Order
+                    )}
+                    Pay Now <i class="fas fa-angle-double-right"></i>
                   </button>
                 </div>
               </div>
