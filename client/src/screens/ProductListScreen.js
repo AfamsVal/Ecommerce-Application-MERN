@@ -90,7 +90,7 @@ const ProductListScreen = ({ history }) => {
                     <th>IMG</th>
                     <th>NAME</th>
                     <th>BRAND</th>
-                    <th>Qty</th>
+                    <th>QTY</th>
                     <th>PRICE</th>
                     <th>POSTED BY</th>
                     <th>CREATED</th>
@@ -106,7 +106,7 @@ const ProductListScreen = ({ history }) => {
                           className="img-fluid"
                           width="70px"
                           src={product.images}
-                          alt={product.name}
+                          alt={product.brand}
                         />
                       </td>
                       <td>{product.name}</td>

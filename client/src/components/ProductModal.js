@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { USER_UPDATE_ADMIN_RESET } from "../constant/userConstant";
 import {
+  adminCreateProductAction,
   adminUpdateProductAction,
   productDetailsAction,
 } from "../action/productActions";
-import { PRODUCT_ADMIN_UPDATE_RESET } from "../constant/productConstant";
+import {
+  PRODUCT_ADMIN_CREATE_RESET,
+  PRODUCT_ADMIN_UPDATE_RESET,
+} from "../constant/productConstant";
 
 const ProductModal = ({ productId }) => {
   const dispatch = useDispatch();
@@ -17,6 +20,12 @@ const ProductModal = ({ productId }) => {
   const { loading: updateLoading, success, error: updateError } = useSelector(
     (state) => state.adminUpdateProduct
   );
+
+  const {
+    loading: createLoading,
+    success: createSuccess,
+    error: createError,
+  } = useSelector((state) => state.adminCreateProduct);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [myProduct, setMyProduct] = useState({
@@ -46,18 +55,29 @@ const ProductModal = ({ productId }) => {
   }, [product, productId]);
 
   useEffect(() => {
-    if (productError) {
+    if (productError || updateError || createError) {
       productError && setMyProduct({ ...myProduct, error: productError });
       updateError && setMyProduct({ ...myProduct, error: updateError });
+      createError && setMyProduct({ ...myProduct, error: createError });
       dispatch({ type: PRODUCT_ADMIN_UPDATE_RESET });
+      dispatch({ type: PRODUCT_ADMIN_CREATE_RESET });
     }
 
-    if (success) {
+    if (success || createSuccess) {
       setMyProduct({ ...myProduct, updateSuccess: true, error: "" });
       setTimeout(() => setIsModalVisible(false), 1500);
       dispatch({ type: PRODUCT_ADMIN_UPDATE_RESET });
+      dispatch({ type: PRODUCT_ADMIN_CREATE_RESET });
     }
-  }, [dispatch, myProduct, productError, updateError, success]);
+  }, [
+    dispatch,
+    myProduct,
+    productError,
+    updateError,
+    success,
+    createSuccess,
+    createError,
+  ]);
 
   //SHOW MODAL
   const showModal = (productId) => {
@@ -80,41 +100,49 @@ const ProductModal = ({ productId }) => {
     }
   };
 
-  //
-  const handleUpdate = () => {
+  const validate = () => {
     setMyProduct({ ...myProduct, error: "" });
     setAlert(true);
     if (!myProduct.name)
-      return setMyProduct({ ...myProduct, error: "Name feild is required!" });
+      return setMyProduct({ ...myProduct, error: "Name field is required!" });
     if (!myProduct.brand)
-      return setMyProduct({ ...myProduct, error: "Brand feild is required!" });
+      return setMyProduct({ ...myProduct, error: "Brand field is required!" });
     if (!myProduct.countInStock)
       return setMyProduct({
         ...myProduct,
         error: "Count in Stock is required!",
       });
     if (!myProduct.price)
-      return setMyProduct({ ...myProduct, error: "Price feild is required!" });
+      return setMyProduct({ ...myProduct, error: "Price field is required!" });
 
     if (!myProduct.category)
       return setMyProduct({
         ...myProduct,
-        error: "Category feild is required!",
+        error: "Category field is required!",
       });
 
     if (!myProduct.description)
       return setMyProduct({
         ...myProduct,
-        error: "Description feild is required!",
+        error: "Description field is required!",
       });
+    return "success";
+  };
 
-    const { error, updateSuccess, productId, ...productObj } = myProduct;
-    dispatch(adminUpdateProductAction(productId, productObj));
+  //
+  const handleUpdate = () => {
+    if (validate() === "success") {
+      const { error, updateSuccess, productId, ...productObj } = myProduct;
+      dispatch(adminUpdateProductAction(productId, productObj));
+    }
   };
 
   //
   const handleCreate = () => {
-    //
+    if (validate() === "success") {
+      const { error, updateSuccess, productId, ...productObj } = myProduct;
+      dispatch(adminCreateProductAction(productObj));
+    }
   };
 
   const handleCancel = () => {
@@ -168,7 +196,7 @@ const ProductModal = ({ productId }) => {
               </>
             ) : (
               <>
-                {updateLoading ? (
+                {updateLoading || createLoading ? (
                   <div className="spinner-border spinner-border-sm mr-1"></div>
                 ) : (
                   <i className="fas fa-plus mr-1"></i>
@@ -251,6 +279,7 @@ const ProductModal = ({ productId }) => {
                     ? myProduct.countInStock
                     : "Count in Stock*"}
                 </option>
+                <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="5">5</option>
@@ -305,6 +334,7 @@ const ProductModal = ({ productId }) => {
               <textarea
                 className="form-control resize-none"
                 rows="4"
+                name="description"
                 placeholder="Description*"
                 value={myProduct.description}
                 onChange={({ target }) =>

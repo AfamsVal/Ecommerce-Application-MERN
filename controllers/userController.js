@@ -1,6 +1,5 @@
 import asyncHandler from "express-async-handler";
 import User from "../Models/UserModel.js";
-import UserModel from "../Models/UserModel.js";
 import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 
@@ -108,8 +107,10 @@ const registerUser = asyncHandler(async (req, res) => {
 //@DESC Fetch all user
 //@ROUTE GET api/users
 //@ACCESS ADMIN PRIVATE
-const adminFetchUser = asyncHandler(async (req, res) => {
-  const users = await User.find({}).select("-password -__v");
+const adminFetchUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+    .select("-password -__v")
+    .sort({ createdAt: "descending" });
   res.json(users);
 });
 
@@ -167,7 +168,7 @@ export {
   getUserProfile,
   updateUserProfile,
   registerUser,
-  adminFetchUser,
+  adminFetchUsers,
   deleteUser,
   updateAdminUser,
 };

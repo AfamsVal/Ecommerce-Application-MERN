@@ -12,6 +12,9 @@ import {
   PRODUCT_ADMIN_UPDATE_REQUEST,
   PRODUCT_ADMIN_UPDATE_FAIL,
   PRODUCT_ADMIN_UPDATE_SUCCESS,
+  PRODUCT_ADMIN_CREATE_SUCCESS,
+  PRODUCT_ADMIN_CREATE_FAIL,
+  PRODUCT_ADMIN_CREATE_REQUEST,
 } from "../constant/productConstant.js";
 
 export const listProductsAction = () => async (dispatch) => {
@@ -107,6 +110,39 @@ export const adminUpdateProductAction = (productId, productObj) => async (
   } catch (error) {
     dispatch({
       type: PRODUCT_ADMIN_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const adminCreateProductAction = (productObj) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({ type: PRODUCT_ADMIN_CREATE_REQUEST });
+    const {
+      userInfo: { token, name },
+    } = getState().userLogin;
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.post("/api/products", productObj, config);
+    dispatch({ type: PRODUCT_ADMIN_CREATE_SUCCESS });
+    data.user = { name };
+    const products = [data, ...getState().productList.products];
+    dispatch({ type: PRODUCT_LIST_SUCCESS, payload: products });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_ADMIN_CREATE_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

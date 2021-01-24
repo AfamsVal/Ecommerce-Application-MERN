@@ -10,6 +10,10 @@ import {
   PRODUCT_ADMIN_UPDATE_REQUEST,
   PRODUCT_ADMIN_UPDATE_FAIL,
   PRODUCT_ADMIN_UPDATE_RESET,
+  PRODUCT_ADMIN_CREATE_SUCCESS,
+  PRODUCT_ADMIN_CREATE_FAIL,
+  PRODUCT_ADMIN_CREATE_REQUEST,
+  PRODUCT_ADMIN_CREATE_RESET,
 } from "../constant/productConstant.js";
 
 const initialState = {
@@ -86,8 +90,35 @@ const adminUpdateProductReducer = (state = {}, action) => {
   }
 };
 
+const adminCreateProductReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PRODUCT_ADMIN_CREATE_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case PRODUCT_ADMIN_CREATE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case PRODUCT_ADMIN_CREATE_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    case PRODUCT_ADMIN_CREATE_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
 export {
   productListReducer,
   adminProductDeleteReducer,
   adminUpdateProductReducer,
+  adminCreateProductReducer,
 };

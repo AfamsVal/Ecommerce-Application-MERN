@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  adminFetchUser,
+  adminFetchUsers,
   authUser,
   deleteUser,
   getUserProfile,
@@ -18,7 +18,7 @@ router
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 router.route("/register").post(registerUser);
-router.route("/").get(protect, isAdmin, adminFetchUser);
+router.route("/").get(protect, isAdmin, adminFetchUsers);
 router
   .route("/:id")
   .delete(protect, isAdmin, deleteUser)
