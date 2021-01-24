@@ -46,7 +46,7 @@ const adminCreateProductList = asyncHandler(async (req, res) => {
 
   const createdProduct = await newProduct.save();
   if (createdProduct) {
-    res.status(201).json(createdProduct).select("-__v");
+    res.status(201).json(createdProduct);
   } else {
     res.status(404);
     throw new Error({ error: "Unable to create product!" });

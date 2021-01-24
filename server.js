@@ -1,10 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import path, { dirname } from "path";
 
 import ProductRoute from "./route_api/productRoute.js";
 import userRoute from "./route_api/userRoute.js";
 import orderRoute from "./route_api/orderRoute.js";
+import uploadRoute from "./route_api/uploadRoute.js";
 
 dotenv.config();
 
@@ -14,10 +16,16 @@ app.use(express.json());
 app.use("/api/products", ProductRoute);
 app.use("/api/users/", userRoute);
 app.use("/api/order/", orderRoute);
+app.use("/api/upload/", uploadRoute);
 
 app.get("/api/config/paypal", (req, res) =>
   res.send(process.env.PAYPAL_CLIENT_ID)
 );
+
+//using __dirname is not available in es6 module in nodejs, so we need to resolve it
+const __dirname = path.resolve();
+//making our upload folder availabe when page loads in browser, we will need to convert it to a static folder
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 //Manage wrong URL
 //////////////////////////////

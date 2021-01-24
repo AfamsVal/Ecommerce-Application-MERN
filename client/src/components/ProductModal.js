@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import { Modal, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
+import uploagImg from "../images/upload.jpg";
 import {
   adminCreateProductAction,
   adminUpdateProductAction,
@@ -12,6 +14,7 @@ import {
 } from "../constant/productConstant";
 
 const ProductModal = ({ productId }) => {
+  const fileInput = useRef(null);
   const dispatch = useDispatch();
   const { loading, product, error: productError } = useSelector(
     (state) => state.productDetails
@@ -28,6 +31,8 @@ const ProductModal = ({ productId }) => {
   } = useSelector((state) => state.adminCreateProduct);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [upLoading, setUpLoading] = useState(false);
+  const [upLoadNo, setUpLoadNo] = useState(0);
   const [myProduct, setMyProduct] = useState({
     name: "",
     price: "",
@@ -139,9 +144,47 @@ const ProductModal = ({ productId }) => {
 
   //
   const handleCreate = () => {
+    return console.log(myProduct);
     if (validate() === "success") {
       const { error, updateSuccess, productId, ...productObj } = myProduct;
       dispatch(adminCreateProductAction(productObj));
+    }
+  };
+
+  const imgUploadHandler = async (e) => {
+    setUpLoading(true);
+    const file = e.target.files[0];
+    console.log(file);
+    let formData = new FormData();
+    formData.append("productImages", file);
+    formData.append("age", 21);
+
+    // console.log("first", Array.from(formData));
+
+    // for (let fData of formData) {
+    //   console.log("second", fData);
+    // }
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        onUploadProgress: (ProgressEvent) => {
+          setUpLoadNo(
+            Math.round((ProgressEvent.loaded / ProgressEvent.total) * 100)
+          );
+        },
+      };
+
+      const { data } = await axios.post("/api/upload", formData, config);
+      //setMyProduct((prevState) => ({ ...prevState, images: data }));
+      console.log(data);
+      setUpLoading(false);
+      console.log(data);
+    } catch (error) {
+      setUpLoading(false);
+      // setMyProduct((prevState) => ({ ...prevState, error }));
+      console.log("error", error);
     }
   };
 
@@ -346,7 +389,45 @@ const ProductModal = ({ productId }) => {
             {!productId && (
               <div className="form-group col-12">
                 <label htmlFor="email">Upload product label:</label>
-                <input type="file" className="form-control-file border" />
+                <form encType="multipart/form-data">
+                  <input
+                    type="file"
+                    style={{ display: "none" }}
+                    multiple
+                    ref={fileInput}
+                    accept="image/*"
+                    onChange={imgUploadHandler}
+                    className="form-control-file border "
+                  />
+                  <img
+                    src={uploagImg}
+                    className="img-fluid cursor-pointer"
+                    onClick={() => fileInput.current.click()}
+                    alt="upload button"
+                  />
+                </form>
+                {upLoading && (
+                  <div className="progress mt-2">
+                    <div
+                      className="progress-bar progress-bar-striped progress-bar-animated"
+                      style={{ width: `${upLoadNo}%` }}
+                    >
+                      {upLoadNo}%
+                    </div>
+                  </div>
+                )}
+                {upLoadNo === 100 && (
+                  <>
+                    <div className="">
+                      <img
+                        src={`../../../${myProduct.images}`}
+                        width="100px"
+                        alt="uploads"
+                      />
+                    </div>
+                    <h6 className="mt-2 text-success">Uploaded successfully</h6>
+                  </>
+                )}
               </div>
             )}
           </div>
