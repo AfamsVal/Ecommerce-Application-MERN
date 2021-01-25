@@ -144,7 +144,6 @@ const ProductModal = ({ productId }) => {
 
   //
   const handleCreate = () => {
-    return console.log(myProduct);
     if (validate() === "success") {
       const { error, updateSuccess, productId, ...productObj } = myProduct;
       dispatch(adminCreateProductAction(productObj));
@@ -154,7 +153,6 @@ const ProductModal = ({ productId }) => {
   const imgUploadHandler = async (e) => {
     setUpLoading(true);
     const file = e.target.files[0];
-    console.log(file);
     let formData = new FormData();
     formData.append("productImages", file);
     formData.append("age", 21);
@@ -177,14 +175,11 @@ const ProductModal = ({ productId }) => {
       };
 
       const { data } = await axios.post("/api/upload", formData, config);
-      //setMyProduct((prevState) => ({ ...prevState, images: data }));
-      console.log(data);
+      setMyProduct((prevState) => ({ ...prevState, images: data }));
       setUpLoading(false);
-      console.log(data);
     } catch (error) {
       setUpLoading(false);
-      // setMyProduct((prevState) => ({ ...prevState, error }));
-      console.log("error", error);
+      setMyProduct((prevState) => ({ ...prevState, error }));
     }
   };
 

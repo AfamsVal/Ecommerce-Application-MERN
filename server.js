@@ -24,6 +24,7 @@ app.get("/api/config/paypal", (req, res) =>
 
 //using __dirname is not available in es6 module in nodejs, so we need to resolve it
 const __dirname = path.resolve();
+
 //making our upload folder availabe when page loads in browser, we will need to convert it to a static folder
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
