@@ -1,7 +1,12 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
-import productListReducer from "./reducers/productReducer";
+import {
+  productListReducer,
+  adminProductDeleteReducer,
+  adminUpdateProductReducer,
+  adminCreateProductReducer,
+} from "./reducers/productReducers";
 import productDetailsReducer from "./reducers/productDetailsReducer";
 import cartReducer from "./reducers/cartReducer";
 import {
@@ -11,6 +16,7 @@ import {
   userUpdateProfileReducer,
   userListReducer,
   userDeleteReducer,
+  updateUserAdminReducer,
 } from "./reducers/userReducer";
 
 import { progressBarReducer } from "./reducers/progressBarReducer";
@@ -36,6 +42,10 @@ const reducer = combineReducers({
   orderListMy: orderListMyReducer,
   userList: userListReducer,
   userDelete: userDeleteReducer,
+  updateUserAdmin: updateUserAdminReducer,
+  adminProductDelete: adminProductDeleteReducer,
+  adminUpdateProduct: adminUpdateProductReducer,
+  adminCreateProduct: adminCreateProductReducer,
 });
 
 const loadCartItem = localStorage.getItem("cartItems")

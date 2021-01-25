@@ -2,29 +2,36 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import errorImg from "../images/error.gif";
-import { userDeleteAction, userListAction } from "../action/userAction";
-import ModalBox from "../components/ModalBox";
+import { formatNumber } from "../utils/numberFormatter";
+import {
+  productDeleteAction,
+  listProductsAction,
+} from "../action/productActions";
+import ProductModal from "../components/ProductModal";
 
-const UserListScreen = ({ history }) => {
+const ProductListScreen = ({ history }) => {
   const dispatch = useDispatch();
 
-  const { loading, users, error } = useSelector(({ userList }) => userList);
+  const { loading, products, error } = useSelector(
+    ({ productList }) => productList
+  );
   const { userInfo } = useSelector((state) => state.userLogin);
-  const { loading: deleteLoading, userId: deleteUserId } = useSelector(
-    ({ userDelete }) => userDelete
+
+  const { loading: deleteLoading, productId: deleteProductId } = useSelector(
+    ({ adminProductDelete }) => adminProductDelete
   );
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(userListAction());
+      dispatch(listProductsAction());
     } else {
       history.push("/");
     }
   }, [dispatch, history, userInfo]);
 
-  const userDeleteHandler = (userId, name) => {
+  const productDeleteHandler = (productId, name) => {
     if (window.confirm(`Are you sure you want to delete ${name}`)) {
-      dispatch(userDeleteAction(userId));
+      dispatch(productDeleteAction(productId));
     }
   };
 
@@ -55,7 +62,7 @@ const UserListScreen = ({ history }) => {
         </div>
       </div>
     </div>
-  ) : users && users.length === 0 && !loading ? (
+  ) : products && products.length === 0 && !loading ? (
     <div className="container mt-4 mb-2" style={{ backgroundColor: "#ddd" }}>
       <div className="row mb-5">
         <div className="col-12 py-5">
@@ -67,49 +74,59 @@ const UserListScreen = ({ history }) => {
     <>
       <div className="container mt-6 mb-2">
         <div className="row mt-3 py-4 my-5">
-          <div className="col-sm-12 mb-3">
-            <h3 className="text-center text-uppercase font-weight-bold mb-3">
-              All Users
+          <div className="col-sm-6 mb-3">
+            <h3 className="text-uppercase font-weight-bold mb-3">
+              All Products
             </h3>
+          </div>
+          <div className="col-sm-6 mb-3 text-right">
+            <ProductModal productId="" />
+          </div>
+          <div className="col-sm-12 mb-3">
             <div className="table-responsive-sm">
               <table className="table table-sm table-striped table-bordered text-center">
                 <thead>
                   <tr>
-                    <th>USER ID</th>
+                    <th>IMG</th>
                     <th>NAME</th>
-                    <th>EMAIL PRICE</th>
-                    <th>ADMIN</th>
-                    <th>JOINED</th>
+                    <th>BRAND</th>
+                    <th>QTY</th>
+                    <th>PRICE</th>
+                    <th>POSTED BY</th>
+                    <th>CREATED</th>
                     <th>EDIT</th>
                     <th>DEL</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {users.map((user) => (
-                    <tr key={user._id}>
-                      <td>{user._id}</td>
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
+                  {products.map((product) => (
+                    <tr key={product._id}>
                       <td>
-                        {user.isAdmin ? (
-                          <strong className="text-success">YES</strong>
-                        ) : (
-                          <strong className="text-danger">
-                            <i className="fas fa-times"></i>
-                          </strong>
-                        )}
+                        <img
+                          className="img-fluid"
+                          width="70px"
+                          src={product.images}
+                          alt={product.brand}
+                        />
                       </td>
-                      <td>{user.createdAt.substring(0, 10)}</td>
+                      <td>{product.name}</td>
+                      <td>{product.brand}</td>
+                      <td>{product.countInStock}</td>
+                      <td>${formatNumber(product.price)}</td>
+                      <td>{product.user.name}</td>
+                      <td>{product.createdAt.substring(0, 10)}</td>
 
                       <td>
-                        <ModalBox userId={user._id} />
+                        <ProductModal productId={product._id} />
                       </td>
                       <td>
                         <button
                           className="btn btn-danger btn-sm"
-                          onClick={() => userDeleteHandler(user._id, user.name)}
+                          onClick={() =>
+                            productDeleteHandler(product._id, product.name)
+                          }
                         >
-                          {deleteLoading && user._id === deleteUserId ? (
+                          {deleteLoading && product._id === deleteProductId ? (
                             <div className="spinner-border spinner-border-sm"></div>
                           ) : (
                             <i className="fas fa-trash-alt"></i>
@@ -128,4 +145,4 @@ const UserListScreen = ({ history }) => {
   );
 };
 
-export default UserListScreen;
+export default ProductListScreen;

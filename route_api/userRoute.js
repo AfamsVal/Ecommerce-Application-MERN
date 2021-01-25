@@ -1,10 +1,11 @@
 import express from "express";
 import {
-  adminFetchUser,
+  adminFetchUsers,
   authUser,
   deleteUser,
   getUserProfile,
   registerUser,
+  updateAdminUser,
   updateUserProfile,
 } from "../controllers/userController.js";
 import { isAdmin, protect } from "../middleware/authMiddleware.js";
@@ -17,7 +18,10 @@ router
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 router.route("/register").post(registerUser);
-router.route("/").get(protect, isAdmin, adminFetchUser);
-router.route("/:id").delete(protect, isAdmin, deleteUser);
+router.route("/").get(protect, isAdmin, adminFetchUsers);
+router
+  .route("/:id")
+  .delete(protect, isAdmin, deleteUser)
+  .put(protect, isAdmin, updateAdminUser);
 
 export default router;

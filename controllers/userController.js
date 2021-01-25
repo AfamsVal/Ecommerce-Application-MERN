@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import User from "../Models/UserModel.js";
-import UserModel from "../Models/UserModel.js";
+import bcrypt from "bcryptjs";
 import generateToken from "../utils/generateToken.js";
 
 //@DESC auth user & get token
@@ -107,8 +107,10 @@ const registerUser = asyncHandler(async (req, res) => {
 //@DESC Fetch all user
 //@ROUTE GET api/users
 //@ACCESS ADMIN PRIVATE
-const adminFetchUser = asyncHandler(async (req, res) => {
-  const users = await User.find({});
+const adminFetchUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+    .select("-password -__v")
+    .sort({ createdAt: "descending" });
   res.json(users);
 });
 
@@ -120,11 +122,44 @@ const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(userId);
   if (user) {
     await user.remove();
-    const users = await User.find({});
+    const users = await User.find({}).select("-password -__v");
     res.json({ users });
   } else {
     res.status(404);
     throw new Error("User not found!");
+  }
+});
+
+//
+//@DESC Update Admin User
+//@ROUTE PUT api/users/:id
+//@ACCESS ADMIN Private
+const updateAdminUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    const password = req.body.password;
+    if (password.toString().trim() === "") {
+      res.status(404);
+      throw new Error("Password is required");
+    }
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      res.status(400);
+      throw new Error("Incorrect Password!");
+    }
+
+    const updatedUser = await user.save();
+    if (updatedUser) {
+      const users = await User.find({}).select("-password -__v");
+      res.json(users);
+    }
+  } else {
+    res.status(404);
+    throw new Error("User no found!");
   }
 });
 
@@ -133,6 +168,7 @@ export {
   getUserProfile,
   updateUserProfile,
   registerUser,
-  adminFetchUser,
+  adminFetchUsers,
   deleteUser,
+  updateAdminUser,
 };

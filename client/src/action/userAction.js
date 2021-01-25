@@ -22,6 +22,9 @@ import {
   USER_DELETE_SUCCESS,
   USER_DELETE_FAIL,
   USER_DELETE_REQUEST,
+  USER_UPDATE_ADMIN_REQUEST,
+  USER_UPDATE_ADMIN_SUCCESS,
+  USER_UPDATE_ADMIN_FAIL,
 } from "../constant/userConstant";
 import { progressAction } from "./progressBarAction";
 
@@ -135,6 +138,39 @@ export const userUpdateProfileAction = (userObj) => async (
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+export const updateUserAdminAction = (userId, userObj) => async (
+  dispatch,
+  getState
+) => {
+  try {
+    dispatch({ type: USER_UPDATE_ADMIN_REQUEST });
+    const {
+      userLogin: {
+        userInfo: { token },
+      },
+    } = getState();
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.put(`/api/users/${userId}`, userObj, config);
+
+    dispatch({ type: USER_UPDATE_ADMIN_SUCCESS });
+    dispatch({ type: USER_LIST_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_UPDATE_ADMIN_FAIL,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

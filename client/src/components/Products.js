@@ -1,25 +1,27 @@
-import React from "react"
-import { Link } from "react-router-dom"
-import Rating from "../components/Rating"
-import PropTypes from "prop-types"
-import { useDispatch } from "react-redux"
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton"
-import { cartAction } from "../action/cartAction"
-import { notification } from "antd"
-import "antd/dist/antd.css"
+import React from "react";
+import { Link } from "react-router-dom";
+import Rating from "../components/Rating";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { cartAction } from "../action/cartAction";
+import { notification } from "antd";
+import "antd/dist/antd.css";
+import { formatNumber } from "../utils/numberFormatter";
 
-const Context = React.createContext({ name: "Default" })
+const Context = React.createContext({ name: "Default" });
 
 const Products = ({ error, loading, products }) => {
-  const [api, contextHolder] = notification.useNotification()
+  const [api, contextHolder] = notification.useNotification();
 
   const openNotification = (placement) => {
     api.error({
       message: `This product is out of stock`,
       placement,
-    })
-  }
-  const dispatch = useDispatch()
+      style: { backgroundColor: "#fbceb1" },
+    });
+  };
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -30,7 +32,7 @@ const Products = ({ error, loading, products }) => {
           </h1>
         </div>
       ) : !loading ? (
-        <Context.Provider value={{ name: "Ant Design" }}>
+        <Context.Provider className="bg-danger" value={{ name: "Ant Design" }}>
           {contextHolder}
           {products.map(
             ({
@@ -71,7 +73,7 @@ const Products = ({ error, loading, products }) => {
                       {name.length > 20 && "..."}
                     </p>
                     <p className="card-text text-brown font-weight-bold font-size-3 pb-0 mb-1">
-                      ~ ${price} ~
+                      ~ ${formatNumber(price)} ~
                     </p>
                     <div className="pb-1 bg-gray">
                       <Rating
@@ -155,11 +157,11 @@ const Products = ({ error, loading, products }) => {
         </>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;
 
 Products.propTypes = {
   products: PropTypes.array.isRequired,
-}
+};

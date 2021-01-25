@@ -2,17 +2,29 @@ import express from "express";
 import ProductModel from "../Models/ProductModel.js";
 import {
   getProducts,
-  getProductById,
+  //getProductById,
+  adminDeleteProductList,
+  adminCreateProductList,
+  adminUpdateProductList,
 } from "../controllers/productControllers.js";
+import { isAdmin, protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
 //@desc Fetch all products
 //@route /api/products
 //@access Public
-// router.route("/").get(getProducts)
-//OR
-router.get("/", getProducts);
+router
+  .get("/", getProducts)
+  .post("/", protect, isAdmin, adminCreateProductList);
+
+//@desc Delete a product
+//@route /api/products/:id
+//@access Private Admin Delete
+router
+  .route("/:id")
+  .delete(protect, isAdmin, adminDeleteProductList)
+  .put(protect, isAdmin, adminUpdateProductList);
 
 //@desc Fetch single product
 //@route /api/products/:id

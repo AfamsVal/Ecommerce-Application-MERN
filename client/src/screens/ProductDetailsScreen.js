@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import Rating from "../components/Rating";
 import { useSelector, useDispatch } from "react-redux";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { productDetailsReducer } from "../action/productActions";
+import { productDetailsAction } from "../action/productActions";
 import errorImg from "../images/error.gif";
+import { formatNumber } from "../utils/numberFormatter";
 
 const ProductDetails = (props) => {
   const { goBack } = props.history;
@@ -30,7 +31,7 @@ const ProductDetails = (props) => {
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
-    dispatch(productDetailsReducer(id));
+    dispatch(productDetailsAction(id));
   }, [dispatch, id]);
 
   useEffect(() => {
@@ -110,7 +111,9 @@ const ProductDetails = (props) => {
               <p className="product-description my-3">{description}</p>
               <h4>
                 Current price:{" "}
-                <span className="font-weight-bolder">${price}</span>
+                <span className="font-weight-bolder">
+                  ${formatNumber(price)}
+                </span>
               </h4>
               <div className="row mt-2">
                 <div className="col-6">
@@ -133,10 +136,6 @@ const ProductDetails = (props) => {
                   )}
                 </div>
               </div>
-              <p className="vote mt-3">
-                <strong>91%</strong> of buyers enjoyed this product!{" "}
-                <strong>(87 votes)</strong>
-              </p>
 
               <div>
                 {countInStock !== 0 && (

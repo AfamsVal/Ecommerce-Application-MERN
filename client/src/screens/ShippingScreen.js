@@ -133,7 +133,8 @@ const ShippingScreen = ({ history }) => {
                       {/* {loading && (
                         <div className="spinner-border spinner-border-sm"></div>
                       )}{" "} */}
-                      Continue with Payment
+                      Continue with Payment{" "}
+                      <i class="fas fa-angle-double-right"></i>
                     </button>
                   </div>
                 </form>
