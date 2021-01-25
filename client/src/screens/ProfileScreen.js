@@ -24,6 +24,10 @@ const Profile = ({ history }) => {
     password: "",
   });
   const [alert, setAlert] = useState(true);
+  const [{ prevImg, imgFile }, setProfileImage] = useState({
+    prevImg: "",
+    imgFile: "",
+  });
 
   useEffect(() => {
     if (!userInfo) {
@@ -50,6 +54,21 @@ const Profile = ({ history }) => {
     e.preventDefault();
     dispatch(userUpdateProfileAction({ ...userData, id: user._id }));
     setAlert(true);
+  };
+
+  const handleFileChange = (e) => {
+    e.persist();
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImage((prevState) => ({
+          ...prevState,
+          prevImg: reader.result,
+          imgFile: e.target.files[0],
+        }));
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
   };
 
   return (
@@ -82,12 +101,23 @@ const Profile = ({ history }) => {
             <div className="row">
               <div className="col-12 col-sm-5 col-md-4 mt-2">
                 <img
-                  src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
-                  className="avatar img-circle img-rounded"
+                  src={
+                    prevImg
+                      ? prevImg
+                      : "http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
+                  }
+                  className="avatar img-rounded img-fluid w-100"
                   alt="avatar"
                 />
                 <p className="mt-2">Upload a profile photo...</p>
-                <input type="file" />
+                <input type="file" onChange={handleFileChange} />
+                {prevImg && (
+                  <p className="mt-2">
+                    <button className="btn btn-sm btn-secondary">
+                      <i class="fas fa-cloud-upload-alt"></i> Upload Now
+                    </button>
+                  </p>
+                )}
               </div>
               <div className="col-12 col-sm-7 col-md-8 mb-5">
                 <form onSubmit={handleSubmit}>
