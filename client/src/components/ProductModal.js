@@ -33,6 +33,7 @@ const ProductModal = ({ productId }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [upLoading, setUpLoading] = useState(false);
   const [upLoadNo, setUpLoadNo] = useState(0);
+  const [uploadError, setUploadError] = useState("");
   const [myProduct, setMyProduct] = useState({
     name: "",
     price: "",
@@ -131,6 +132,12 @@ const ProductModal = ({ productId }) => {
         ...myProduct,
         error: "Description field is required!",
       });
+
+    if (!myProduct.images && !productId)
+      return setMyProduct({
+        ...myProduct,
+        error: "Upload product image!",
+      });
     return "success";
   };
 
@@ -152,6 +159,8 @@ const ProductModal = ({ productId }) => {
 
   const imgUploadHandler = async (e) => {
     setUpLoading(true);
+    setUpLoadNo(0);
+    setUploadError("");
     const file = e.target.files[0];
     let formData = new FormData();
     formData.append("productImages", file);
@@ -173,13 +182,12 @@ const ProductModal = ({ productId }) => {
           );
         },
       };
-
       const { data } = await axios.post("/api/upload", formData, config);
       setMyProduct((prevState) => ({ ...prevState, images: data }));
       setUpLoading(false);
     } catch (error) {
       setUpLoading(false);
-      setMyProduct((prevState) => ({ ...prevState, error }));
+      setUploadError("Image upload failed!");
     }
   };
 
@@ -390,7 +398,7 @@ const ProductModal = ({ productId }) => {
                     style={{ display: "none" }}
                     multiple
                     ref={fileInput}
-                    accept="image/*"
+                    // accept="image/*"
                     onChange={imgUploadHandler}
                     className="form-control-file border "
                   />
@@ -401,7 +409,7 @@ const ProductModal = ({ productId }) => {
                     alt="upload button"
                   />
                 </form>
-                {upLoading && (
+                {upLoading && !uploadError && (
                   <div className="progress mt-2">
                     <div
                       className="progress-bar progress-bar-striped progress-bar-animated"
@@ -411,9 +419,9 @@ const ProductModal = ({ productId }) => {
                     </div>
                   </div>
                 )}
-                {upLoadNo === 100 && (
+                {upLoadNo === 100 && !uploadError && (
                   <>
-                    <div className="">
+                    <div className="mt-2">
                       <img
                         src={`../../../${myProduct.images}`}
                         width="100px"
@@ -422,6 +430,9 @@ const ProductModal = ({ productId }) => {
                     </div>
                     <h6 className="mt-2 text-success">Uploaded successfully</h6>
                   </>
+                )}
+                {uploadError && (
+                  <h6 className="mt-2 text-danger">Uploading Failed!</h6>
                 )}
               </div>
             )}
