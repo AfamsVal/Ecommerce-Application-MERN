@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { cartAction, deleteCartAction } from "../action/cartAction";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { formatNumber } from "../utils/numberFormatter";
+import noImg from '../images/no-image.png'
 
 const CheckoutItem = ({ items, loading, deleteLoader }) => {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ const CheckoutItem = ({ items, loading, deleteLoader }) => {
         <div className="row mb-3">
           <div className="col-3 col-sm-2 d-none d-sm-block text-left">
             <img
-              src={item.image}
+              src={item.images ? item.images : noImg}
               alt=""
               className="img-fluid rounded mb-2 shadow "
             />

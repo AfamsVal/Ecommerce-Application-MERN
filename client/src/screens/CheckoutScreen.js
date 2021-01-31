@@ -89,7 +89,7 @@ const Checkout = ({ location, history, match }) => {
                 type="button"
                 className="btn btn-secondary"
               >
-                <i class="far fa-trash-alt"></i> Empty Cart
+                <i className="far fa-trash-alt"></i> Empty Cart
               </button>
               <button
                 onClick={paymentHandler}
@@ -99,7 +99,7 @@ const Checkout = ({ location, history, match }) => {
                 }`}
                 disabled={cartItems.length === 0}
               >
-                <i class="fab fa-opencart"></i> Checkout
+                <i className="fab fa-opencart"></i> Checkout
               </button>
             </div>
           </div>
