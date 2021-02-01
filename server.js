@@ -28,6 +28,12 @@ const __dirname = path.resolve();
 //making our upload folder availabe when page loads in browser, we will need to convert it to a static folder
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
+//Setting our build folder to a static folder so that we can directly access it.
+if(process.env.NODE_ENV === "production"){
+app.use(express.static(path.join(__dirname,"/client/build")))
+app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,"clinet","build","index.html")))
+}
+
 //Manage wrong URL
 //////////////////////////////
 app.use((req, res, next) => {
