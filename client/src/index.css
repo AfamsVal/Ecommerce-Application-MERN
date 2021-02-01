@@ -91,7 +91,7 @@ body {
 
 .card,
 .card-body {
-  box-shadow: 0px 0px 3px #656565;
+  box-shadow: 0px 0px 3px #d1cece;
   width: fit-content;
 }
 
@@ -204,7 +204,7 @@ footer p {
   color: #fff;
 }
 
-.resize-none{
+.resize-none {
   resize: none;
 }
 
@@ -249,4 +249,6 @@ dropdown {
   padding: 15px 45px;
 }
 
-.not-allowed {cursor: not-allowed;}
+.not-allowed {
+  cursor: not-allowed;
+}

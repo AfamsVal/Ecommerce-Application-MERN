@@ -8,7 +8,7 @@ const OrderSchema = new Schema(
       {
         name: { type: String, required: true },
         qty: { type: Number, required: true },
-        image: { type: String, required: true },
+        images: { type: String },
         price: { type: Number, required: true },
         product: {
           type: Schema.Types.ObjectId,

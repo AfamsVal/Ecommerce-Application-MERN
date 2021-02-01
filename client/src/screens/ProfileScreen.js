@@ -114,7 +114,7 @@ const Profile = ({ history }) => {
                 {prevImg && (
                   <p className="mt-2">
                     <button className="btn btn-sm btn-secondary">
-                      <i class="fas fa-cloud-upload-alt"></i> Upload Now
+                      <i className="fas fa-cloud-upload-alt"></i> Upload Now
                     </button>
                   </p>
                 )}

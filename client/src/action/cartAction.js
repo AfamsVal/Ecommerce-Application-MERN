@@ -17,7 +17,7 @@ export const cartAction = (id, qty) => async (dispatch, getState) => {
       product: data._id,
       name: data.name,
       category: data.category,
-      image: data.images,
+      images: data.images,
       price: data.price,
       countInStock: data.countInStock,
       qty,

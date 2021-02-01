@@ -6,6 +6,7 @@ import { getOrderDetails, orderPayAction } from "../action/orderAction";
 import { PayPalButton } from "react-paypal-button-v2";
 import errorImg from "../images/error.gif";
 import { ORDER_PAY_REQUEST } from "../constant/orderConstant";
+import noImg from '../images/no-image.png'
 
 const OrderScreen = ({ match }) => {
   const myRef = useRef(null);
@@ -172,7 +173,7 @@ const OrderScreen = ({ match }) => {
                             <img
                               className="img-fluid"
                               width="70px"
-                              src={item.image}
+                              src={item.images ? item.images : noImg}
                               alt={item.name}
                             />
                           </td>
@@ -238,14 +239,15 @@ const OrderScreen = ({ match }) => {
                     <strong>Success!</strong> Order placed successfully
                   </div>
                 )}
-                <div className="btn-group btn-block btn-group-lg">
+                <div>
                   {orders.isPaid ? (
-                    <button type="button" className="btn btn-success" disabled>
-                      Paid
+                    <button type="button" className="btn btn-success btn-block" disabled>
+                      <i className="fas fa-thumbs-up"></i> Order Paid
                     </button>
                   ) : (
                     sdkReady && (
                       <PayPalButton
+                      className="btn-block w-100"
                         ref={myRef}
                         amount={orders.totalPrice}
                         onSuccess={successPaymentHandler}

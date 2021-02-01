@@ -8,6 +8,8 @@ import { cartAction } from "../action/cartAction";
 import { notification } from "antd";
 import "antd/dist/antd.css";
 import { formatNumber } from "../utils/numberFormatter";
+import noImg from '../images/no-image.png'
+
 
 const Context = React.createContext({ name: "Default" });
 
@@ -18,7 +20,7 @@ const Products = ({ error, loading, products }) => {
     api.error({
       message: `This product is out of stock`,
       placement,
-      style: { backgroundColor: "#fbceb1" },
+      style: { backgroundColor: "#ffaa91" },
     });
   };
   const dispatch = useDispatch();
@@ -28,7 +30,7 @@ const Products = ({ error, loading, products }) => {
       {error ? (
         <div className="col-12">
           <h1 className="py-5 text-center text-danger">
-            <i className="fa fa-info-circle"></i> {error}
+            <i className="fas fa-info-circle"></i> {error}
           </h1>
         </div>
       ) : !loading ? (
@@ -56,7 +58,7 @@ const Products = ({ error, loading, products }) => {
                   <Link to={`product-details/${_id}`}>
                     <img
                       className="mx-auto img-fluid mx-auto d-block mt-2"
-                      src={images}
+                      src={images ? images : noImg}
                       alt="cart item"
                       width="50%"
                       style={{ minHeight: "130px", maxHeight: "120px" }}

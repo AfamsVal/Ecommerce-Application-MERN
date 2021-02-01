@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import errorImg from "../images/error.gif";
 import { formatNumber } from "../utils/numberFormatter";
+import noImg from '../images/no-image.png'
+
+
 import {
   productDeleteAction,
   listProductsAction,
@@ -105,7 +108,7 @@ const ProductListScreen = ({ history }) => {
                         <img
                           className="img-fluid"
                           width="70px"
-                          src={product.images}
+                          src={product.images ? product.images : noImg}
                           alt={product.brand}
                         />
                       </td>
