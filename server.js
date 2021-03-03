@@ -31,7 +31,9 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 //Setting our build folder to a static folder so that we can directly access it.
 if(process.env.NODE_ENV === "production"){
 app.use(express.static(path.join(__dirname,"/client/build")))
-app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,"clinet","build","index.html")))
+//app.use(express.static("client/build"))
+app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,"client","build","index.html")))
+
 }
 
 //Manage wrong URL
