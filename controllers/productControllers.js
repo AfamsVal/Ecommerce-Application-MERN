@@ -7,6 +7,7 @@ const getProducts = asyncHandler(async (req, res) => {
     .populate("user", "name email");
 
   res.json(products);
+ 
 });
 
 //@desc Delete a product

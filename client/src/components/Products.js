@@ -46,7 +46,7 @@ const Products = ({ error, loading, products }) => {
               countInStock,
               numReviews,
             }) => (
-              <div key={_id} className="col-6 col-sm-6 col-md-4 col-lg-3 py-2">
+              <div key={_id} className="col-6 col-sm-6 col-md-4 col-lg-3 py-2 px-md-2" style={{paddingLeft:"3px",paddingRight:"3px"}}>
                 <div className="card-hover product-card mx-auto bg-light border h-80">
                   {/* <img
               className="mx-auto img-fluid"
