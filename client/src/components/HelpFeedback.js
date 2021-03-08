@@ -4,7 +4,7 @@ const HelpFeedback = () => {
   return (
     <section>
       <div className="row w-100 my-5">
-        <div className="col-md-3 mb-4">
+        <div className="col-6 col-md-3 mb-4">
           <div className="card contact-us border-dark mx-sm-1 p-3 w-100">
             <div className="card border-dark shadow text-dark p-3 my-card">
               <span className="fa fa-shopping-cart" aria-hidden="true"></span>
@@ -17,7 +17,7 @@ const HelpFeedback = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-3 mb-4">
+        <div className="col-6 col-md-3 mb-4">
           <div className="card contact-us border-dark mx-sm-1 p-3 w-100">
             <div className="card border-dark shadow text-dark p-3 my-card">
               <span className="fa fa-eye" aria-hidden="true"></span>
@@ -30,7 +30,7 @@ const HelpFeedback = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-3 mb-4">
+        <div className="col-6 col-md-3 mb-4">
           <div className="card contact-us border-dark mx-sm-1 p-3 w-100">
             <div className="card border-dark shadow text-dark p-3 my-card">
               <span className="fa fa-heart" aria-hidden="true"></span>
@@ -43,7 +43,7 @@ const HelpFeedback = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-3 mb-4">
+        <div className="col-6 col-md-3 mb-4">
           <div className="card contact-us border-dark mx-sm-1 p-3 w-100">
             <div className="card border-dark shadow text-warning p-3 my-card">
               <span
