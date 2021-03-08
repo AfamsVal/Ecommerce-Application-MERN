@@ -5,6 +5,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { productDetailsAction } from "../action/productActions";
 import errorImg from "../images/error.gif";
 import { formatNumber } from "../utils/numberFormatter";
+import noImg from '../images/no-image.png'
 
 const ProductDetails = (props) => {
   const { goBack } = props.history;
@@ -99,7 +100,7 @@ const ProductDetails = (props) => {
                 </span>
               </p>
               <hr />
-              <img className="w-100" src={images} alt={name} />
+              <img className="w-100" src={ images ? images : noImg } alt={name} />
             </div>
           </div>
           <div className="col-sm-7">

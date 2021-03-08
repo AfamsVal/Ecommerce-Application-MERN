@@ -6,11 +6,11 @@ const ARR = [1, 2, 3, 4, 5]
 const Rating = ({ rating, numReviews }) => {
   const rate = ARR.map((no) =>
     rating >= no ? (
-      <i key={no} className="pr-1 fa fa-star text-brown"></i>
+      <i key={no} className="fas fa-star text-brown pr-1"></i>
     ) : rating === no - 0.5 ? (
-      <i key={no} className="pr-1 fa fa-star-half-o text-brown"></i>
+      <i key={no} className="fas fa-star-half-alt text-brown pr-1"></i>
     ) : (
-      <i key={no} className="pr-1 fa fa-star-o"></i>
+      <i key={no} className="far fa-star text-brown pr-1"></i>
     )
   )
   return (

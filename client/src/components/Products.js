@@ -55,18 +55,18 @@ const Products = ({ error, loading, products }) => {
               width="auto"
               height="auto"
             /> */}
+            <div style={{ height: "120px" }}>
                   <Link to={`product-details/${_id}`}>
                     <img
-                      className="mx-auto img-fluid mx-auto d-block mt-2"
+                      className="mx-auto img-fluid d-block mt-2 h-100 py-2 d-block"
                       src={images ? images : noImg}
                       alt="cart item"
                       width="50%"
-                      style={{ minHeight: "130px", maxHeight: "120px" }}
-                      height="50%"
                     />
                   </Link>
+                  </div>
 
-                  <div className="card-body text-center mx-auto w-100">
+                  <div className="card-body text-center mx-auto pt-0 w-100">
                     <p
                       className="card-title font-weight-bold my-0 w-100"
                       title={name}

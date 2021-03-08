@@ -6,6 +6,27 @@ import { logoutAction } from "../action/userAction";
 //import { SmileOutlined } from '@ant-design/icons';
 
 const Navbar = () => {
+  const [state, setState] = useState({
+    collapsed: true,
+  });
+
+  const toggleNavbar = () => {
+    setState({
+      ...collapsed,
+      collapsed: !state.collapsed,
+    });
+  };
+
+
+  const collapsed = state.collapsed;
+  const classOne = collapsed
+    ? "collapse navbar-collapse"
+    : "collapse navbar-collapse show";
+  const classTwo = collapsed
+    ? "navbar-toggler navbar-toggler-right collapsed"
+    : "navbar-toggler navbar-toggler-right";
+
+
   const dispatch = useDispatch();
   const [count, setCount] = useState(0);
 
@@ -27,19 +48,30 @@ const Navbar = () => {
       </Link>
 
       <button
-        className="navbar-toggler"
+        className={`${classTwo} navbar-toggler`}
         type="button"
         data-toggle="collapse"
         data-target="#collapsibleNavbar"
+        onClick={toggleNavbar}
       >
         <span className="navbar-toggler-icon"></span>
       </button>
 
       <div
-        className="justify-content-center collapse navbar-collapse"
+        className={`${classOne} justify-content-end collapse navbar-collapse`}
         id="collapsibleNavbar"
+        onClick={toggleNavbar}
       >
         <ul className="navbar-nav">
+        {count !== 0 && (<li className="nav-item mr-4">
+            <Link to="/checkout" className="nav-link" href="#">
+              <i className="fas fa-shopping-cart">
+                  <sup className="font-size-2 text-danger g-font">
+                    <span className="badge badge-danger">{count}</span>
+                  </sup>
+              </i>
+            </Link>
+          </li>)}
           <li className="nav-item mr-4">
             <Link to="/" className="nav-link">
               <i className="fa fa-home"></i> Home
@@ -60,25 +92,7 @@ const Navbar = () => {
               <i className="fa fa-phone-square"></i> Contact-us
             </Link>
           </li>
-        </ul>
-      </div>
 
-      <div
-        className="justify-content-end collapse navbar-collapse"
-        id="collapsibleNavbar"
-      >
-        <ul className="navbar-nav">
-          <li className="nav-item mr-4">
-            <Link to="/checkout" className="nav-link" href="#">
-              <i className="fas fa-shopping-cart">
-                {count !== 0 && (
-                  <sup className="font-size-2 text-danger g-font">
-                    <span className="badge badge-danger">{count}</span>
-                  </sup>
-                )}
-              </i>
-            </Link>
-          </li>
           <li className="nav-item mr-4">
             <Link to="/register" className="nav-link">
               <i className="fas fa-unlock-alt"></i> Register

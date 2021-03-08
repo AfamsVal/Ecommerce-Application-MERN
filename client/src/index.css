@@ -89,12 +89,6 @@ body {
   border: 1.5px solid grey;
 }
 
-.card,
-.card-body {
-  box-shadow: 0px 0px 3px #d1cece;
-  width: fit-content;
-}
-
 .btn {
   border-radius: 0 !important;
 }
