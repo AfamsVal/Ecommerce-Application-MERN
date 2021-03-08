@@ -9,7 +9,7 @@ import ContactUsScreen from "./screens/ContactUsScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
 import PricingScreen from "./screens/PricingScreen";
-import HelpScreen from "./screens/HelpScreen";
+import FaqScreen from "./screens/FaqScreen";
 import NotFoundScreen from "./screens/NotFoundScreen";
 import ProductDetailsScreen from "./screens/ProductDetailsScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
@@ -58,7 +58,7 @@ function App() {
           exact
           component={ProductDetailsScreen}
         />
-        <Route path="/help" exact component={HelpScreen} />
+        <Route path="/faq" exact component={FaqScreen} />
         <Route path="/forgot-password" exact component={ForgotPasswordScreen} />
         <Route path="/admin/users" exact component={UserListScreen} />
         <Route path="/admin/products" exact component={ProductListScreen} />

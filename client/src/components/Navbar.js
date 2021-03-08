@@ -77,14 +77,15 @@ const Navbar = () => {
               <i className="fa fa-home"></i> Home
             </Link>
           </li>
-          <li className="nav-item mr-4">
-            <Link to="/help" className="nav-link">
-              <i className="fa fa-info-circle"></i> Help
-            </Link>
-          </li>
+         
           <li className="nav-item mr-4">
             <Link to="/pricing" className="nav-link">
               <i className="fab fa-paypal"></i> Pricing
+            </Link>
+          </li>
+          <li className="nav-item mr-4">
+            <Link to="/faq" className="nav-link">
+              <i className="fa fa-info-circle"></i> Faq
             </Link>
           </li>
           <li className="nav-item">
