@@ -3,19 +3,29 @@ import Carosel from "../components/Carosel";
 import Products from "../components/Products";
 import InputText from "../components/InputText";
 import { useSelector, useDispatch } from "react-redux";
-import { listProductsAction } from "../action/productActions";
+import {
+  listProductsAction,
+  productInputSearch,
+} from "../action/productActions";
 
 const Landing = (props) => {
   const { error, loading, products } = useSelector(
     ({ productList }) => productList
   );
+
+const {loading:searchLoading,error:searchError} = useSelector(({productSearch})=>productSearch)
+
   const dispatch = useDispatch();
 
-  const [input, setInput] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
-    dispatch(listProductsAction());
-  }, [dispatch]);
+    if (searchInput) {
+      dispatch(productInputSearch(searchInput));
+    } else {
+      dispatch(listProductsAction());
+    }
+  }, [dispatch, searchInput]);
 
   // Scroll
   const [myRef, setMyRef] = useState({ current: null });
@@ -35,21 +45,23 @@ const Landing = (props) => {
       <div className="container-fluid">
         <div className="row bg-milk ">
           <div className="col-sm-12 pt-5 text-center font-weight-bolder">
-            <h1>POPULAR PRODUCTS</h1>
+            <h1>ALL PRODUCTS</h1>
             <p>
-              Suspendisse varius enim in eros elementum tristique. Duis cursus,
-              mi quis viverra ornare, eros dolor interdum nulla.
+              We offer the best products and services that is second to none.
+              Place an order today and will deliver it as expected.
             </p>
             <p ref={myRef}></p>
           </div>
           <div className="col-sm-8 offset-sm-2 bg-milk mb-2">
             <InputText
               label=""
-              value={input}
+              value={searchInput}
               placeholder="Search for product..."
               className="form-control text-center bg-gray"
-              onChange={({ target }) => setInput(target.value)}
+              onChange={({ target }) => setSearchInput(target.value)}
             />
+            {searchLoading && <h5 className="font-weight-bold text-center">Loading...</h5>}
+            {searchError && <h5 className="font-weight-bold text-danger text-center">{searchError}</h5>}
           </div>
         </div>
 

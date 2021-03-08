@@ -14,6 +14,9 @@ import {
   PRODUCT_ADMIN_CREATE_FAIL,
   PRODUCT_ADMIN_CREATE_REQUEST,
   PRODUCT_ADMIN_CREATE_RESET,
+  PRODUCT_SEARCH_FAIL,
+  PRODUCT_SEARCH_REQUEST,
+  PRODUCT_SEARCH_SUCCESS,
 } from "../constant/productConstant.js";
 
 const initialState = {
@@ -116,9 +119,23 @@ const adminCreateProductReducer = (state = {}, action) => {
   }
 };
 
+const productSearchReducer = (state={},action) =>{
+switch(action.type){
+  case PRODUCT_SEARCH_REQUEST:
+    return {...state,loading:true, error:""}
+  case PRODUCT_SEARCH_SUCCESS:
+    return {...state,loading:false}
+  case PRODUCT_SEARCH_FAIL:
+    return {...state, loading:false, error:"Product not found!"}
+  default:
+    return state;
+}
+}
+
 export {
   productListReducer,
   adminProductDeleteReducer,
   adminUpdateProductReducer,
   adminCreateProductReducer,
+  productSearchReducer,
 };
