@@ -157,26 +157,26 @@ const ProductDetails = (props) => {
         </div>
         {/* comment here */}
         <div className="row mb-5">
-          <div class="col-12 col-md-8 mx-auto">
-        <div class="comment-wrapper">
-            <div class="card">
-                <div class="card-body">
+          <div className="col-12 col-md-8 mx-auto">
+        <div className="comment-wrapper">
+            <div className="card">
+                <div className="card-body">
                 <h4 className="text-center mt-2 mb-4">Comments</h4>
-                    <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                    <textarea className="form-control" placeholder="write a comment..." rows="3"></textarea>
                     <br/>
-                    <button type="button" class="btn btn-info pull-right text-right">
-                    <i class="fas fa-pencil-alt"></i> Post Comment</button>
-                    <div class="clearfix"></div>
+                    <button type="button" className="btn btn-info pull-right text-right">
+                    <i className="fas fa-pencil-alt"></i> Post Comment</button>
+                    <div className="clearfix"></div>
                     <hr/>
-                    <ul class="media-list p-0">
-                        <li class="media">
-                            <a href="#" class="pull-left">
-                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle"/>
+                    <ul className="media-list p-0">
+                        <li className="media">
+                            <a href="#" className="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" className="img-circle"/>
                             </a>
-                            <div class="media-body ml-2">
-                                <strong class="text-primary">@MartinoMont</strong><br/>
-                                <span class="text-muted">
-                                    <small class="text-muted">30 min ago</small>
+                            <div className="media-body ml-2">
+                                <strong className="text-primary">@MartinoMont</strong><br/>
+                                <span className="text-muted">
+                                    <small className="text-muted">30 min ago</small>
                                 </span>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -184,14 +184,14 @@ const ProductDetails = (props) => {
                                 </p>
                             </div>
                         </li>
-                        <li class="media">
-                            <a href="#" class="pull-left">
-                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle"/>
+                        <li className="media">
+                            <a href="#" className="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" className="img-circle"/>
                             </a>
-                            <div class="media-body ml-2">
-                                <strong class="text-primary">@LaurenceCorreil</strong><br/>
-                                <span class="text-muted">
-                                    <small class="text-muted">30 min ago</small>
+                            <div className="media-body ml-2">
+                                <strong className="text-primary">@LaurenceCorreil</strong><br/>
+                                <span className="text-muted">
+                                    <small className="text-muted">30 min ago</small>
                                 </span>
                                 <p>
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -199,14 +199,14 @@ const ProductDetails = (props) => {
                                 </p>
                             </div>
                         </li>
-                        <li class="media">
-                            <a href="#" class="pull-left">
-                                <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" class="img-circle"/>
+                        <li className="media">
+                            <a href="#" className="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" className="img-circle"/>
                             </a>
-                            <div class="media-body ml-2">
-                                <strong class="text-primary">@JohnNida</strong><br/>
-                                <span class="text-muted">
-                                    <small class="text-muted">30 min ago</small>
+                            <div className="media-body ml-2">
+                                <strong className="text-primary">@JohnNida</strong><br/>
+                                <span className="text-muted">
+                                    <small className="text-muted">30 min ago</small>
                                 </span>
                                 <p>
                                     Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing elit.
