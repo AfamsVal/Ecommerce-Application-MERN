@@ -423,7 +423,7 @@ const ProductModal = ({ productId }) => {
                   <>
                     <div className="mt-2">
                       <img
-                        src={`../../../${myProduct.images}`}
+                        src={`../../..${myProduct.images}`}
                         width="100px"
                         alt="uploads"
                       />
