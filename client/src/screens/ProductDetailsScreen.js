@@ -5,7 +5,7 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { productDetailsAction } from "../action/productActions";
 import errorImg from "../images/error.gif";
 import { formatNumber } from "../utils/numberFormatter";
-import noImg from '../images/no-image.png'
+import noImg from "../images/no-image.png";
 
 const ProductDetails = (props) => {
   const { goBack } = props.history;
@@ -79,7 +79,7 @@ const ProductDetails = (props) => {
   ) : (
     <section>
       <div className="container mt-6 mb-2">
-        <div className="row mb-5">
+        <div className="row">
           <div
             onClick={() => goBack()}
             className="col-12 text-dark font-weight-bold cursor-pointer"
@@ -100,7 +100,7 @@ const ProductDetails = (props) => {
                 </span>
               </p>
               <hr />
-              <img className="w-100" src={ images ? images : noImg } alt={name} />
+              <img className="w-100" src={images ? images : noImg} alt={name} />
             </div>
           </div>
           <div className="col-sm-7">
@@ -153,6 +153,72 @@ const ProductDetails = (props) => {
               </div>
             </div>
           </div>
+          {/* <div className="col-12 mt-3"><hr/></div> */}
+        </div>
+        {/* comment here */}
+        <div className="row mb-5">
+          <div class="col-12 col-md-8 mx-auto">
+        <div class="comment-wrapper">
+            <div class="card">
+                <div class="card-body">
+                <h4 className="text-center mt-2 mb-4">Comments</h4>
+                    <textarea class="form-control" placeholder="write a comment..." rows="3"></textarea>
+                    <br/>
+                    <button type="button" class="btn btn-info pull-right text-right">
+                    <i class="fas fa-pencil-alt"></i> Post Comment</button>
+                    <div class="clearfix"></div>
+                    <hr/>
+                    <ul class="media-list p-0">
+                        <li class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_1.jpg" alt="" class="img-circle"/>
+                            </a>
+                            <div class="media-body ml-2">
+                                <strong class="text-primary">@MartinoMont</strong><br/>
+                                <span class="text-muted">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Lorem ipsum dolor sit amet.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_2.jpg" alt="" class="img-circle"/>
+                            </a>
+                            <div class="media-body ml-2">
+                                <strong class="text-primary">@LaurenceCorreil</strong><br/>
+                                <span class="text-muted">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    Lorem ipsum dolor <a href="#">#ipsumdolor </a>adipiscing elit.
+                                </p>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://bootdey.com/img/Content/user_3.jpg" alt="" class="img-circle"/>
+                            </a>
+                            <div class="media-body ml-2">
+                                <strong class="text-primary">@JohnNida</strong><br/>
+                                <span class="text-muted">
+                                    <small class="text-muted">30 min ago</small>
+                                </span>
+                                <p>
+                                    Lorem ipsum dolor <a href="#">#sitamet</a> sit amet, consectetur adipiscing elit.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
         </div>
       </div>
     </section>

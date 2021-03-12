@@ -76,7 +76,7 @@ const Pricing = () => {
                   </li>
                 </ul>
                 <Link to="/#" className="btn btn-block btn-dark text-uppercase">
-                  Button
+                <i class="fas fa-certificate"></i> Select Plan
                 </Link>
               </div>
             </div>
@@ -143,7 +143,7 @@ const Pricing = () => {
                   </li>
                 </ul>
                 <Link to="/#" className="btn btn-block btn-dark text-uppercase">
-                  Button
+                <i class="fas fa-certificate text-info"></i> Select Plan
                 </Link>
               </div>
             </div>
@@ -210,7 +210,7 @@ const Pricing = () => {
                   </li>
                 </ul>
                 <Link to="/#" className="btn btn-block btn-dark text-uppercase">
-                  Button
+                <i class="fas fa-certificate text-success"></i> Select Plan
                 </Link>
               </div>
             </div>

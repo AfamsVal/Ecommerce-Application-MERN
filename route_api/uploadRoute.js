@@ -35,7 +35,7 @@ var upload = multer({
 });
 
 router.post("/", upload.single("productImages"), (req, res) => {
-  res.send(`/${req.file.path.replace(/\\/g, "/")}`);
+  res.send(`${req.file.path.replace(/\\/g, "/")}`);
 });
 
 export default router;
