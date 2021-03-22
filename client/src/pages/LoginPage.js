@@ -33,7 +33,9 @@ const Checkout = ({ location, history }) => {
         <meta name="description" content="Afams Val shopping application" />
         <meta name="keywords" content="buy from landing" />
         <title>Afams Shop -  login</title>
-        <link rel="canonical" href="http://mysite.com/example" />
+        {/* 
+        we use this canonical to tell google where we copied the content that we have in this page so that it will rank that page higher and direct viewers to that page
+        <link rel="canonical" href="http://mysite.com/example" /> */}
       </Helmet>
       <div className="login-form ">
         <form onSubmit={handleSubmit}>
