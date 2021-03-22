@@ -3,25 +3,25 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import LoadingBar from "react-top-loading-bar";
 import { useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
-import LandingScreen from "./screens/LandingScreen";
-import CheckoutScreen from "./screens/CheckoutScreen";
-import ContactUsScreen from "./screens/ContactUsScreen";
-import LoginScreen from "./screens/LoginScreen";
-import RegisterScreen from "./screens/RegisterScreen";
-import PricingScreen from "./screens/PricingScreen";
-import FaqScreen from "./screens/FaqScreen";
-import NotFoundScreen from "./screens/NotFoundScreen";
-import ProductDetailsScreen from "./screens/ProductDetailsScreen";
-import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
+import LandingPage from "./pages/LandingPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import ContactUsPage from "./pages/ContactUsPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import PricingPage from "./pages/PricingPage";
+import FaqPage from "./pages/FaqPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import Footer from "./components/Footer";
-import ProfileScreen from "./screens/ProfileScreen";
-import ShippingScreen from "./screens/ShippingScreen";
-import PaymentScreen from "./screens/PaymentScreen";
-import PlaceOrderScreen from "./screens/PlaceOrderScreen";
-import OrderScreen from "./screens/OrderScreen";
-import UserListScreen from "./screens/UserListScreen";
-import ProductListScreen from "./screens/ProductListScreen";
-import OrderListScreen from "./screens/OrderListScreen";
+import ProfilePage from "./pages/ProfilePage";
+import ShippingPage from "./pages/ShippingPage";
+import PaymentPage from "./pages/PaymentPage";
+import PlaceOrderPage from "./pages/PlaceOrderPage";
+import OrderPage from "./pages/OrderPage";
+import UserListPage from "./pages/UserListPage";
+import ProductListPage from "./pages/ProductListPage";
+import OrderListPage from "./pages/OrderListPage";
 
 function App() {
   const [progress, setProgress] = useState(0);
@@ -42,28 +42,28 @@ function App() {
       />
       <Navbar />
       <Switch>
-        <Route path="/" exact component={LandingScreen} />
-        <Route path="/checkout/:id?" exact component={CheckoutScreen} />
-        <Route path="/login" exact component={LoginScreen} />
-        <Route path="/register" exact component={RegisterScreen} />
-        <Route path="/contact-us" exact component={ContactUsScreen} />
-        <Route path="/profile" exact component={ProfileScreen} />
-        <Route path="/pricing" exact component={PricingScreen} />
-        <Route path="/shipping" exact component={ShippingScreen} />
-        <Route path="/payment" exact component={PaymentScreen} />
-        <Route path="/place-order" exact component={PlaceOrderScreen} />
-        <Route path="/order/:id" exact component={OrderScreen} />
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/checkout/:id?" exact component={CheckoutPage} />
+        <Route path="/login" exact component={LoginPage} />
+        <Route path="/register" exact component={RegisterPage} />
+        <Route path="/contact-us" exact component={ContactUsPage} />
+        <Route path="/profile" exact component={ProfilePage} />
+        <Route path="/pricing" exact component={PricingPage} />
+        <Route path="/shipping" exact component={ShippingPage} />
+        <Route path="/payment" exact component={PaymentPage} />
+        <Route path="/place-order" exact component={PlaceOrderPage} />
+        <Route path="/order/:id" exact component={OrderPage} />
         <Route
           path="/product-details/:id"
           exact
-          component={ProductDetailsScreen}
+          component={ProductDetailsPage}
         />
-        <Route path="/faq" exact component={FaqScreen} />
-        <Route path="/forgot-password" exact component={ForgotPasswordScreen} />
-        <Route path="/admin/users" exact component={UserListScreen} />
-        <Route path="/admin/products" exact component={ProductListScreen} />
-        <Route path="/admin/orders" exact component={OrderListScreen} />
-        <Route path="*" component={NotFoundScreen} />
+        <Route path="/faq" exact component={FaqPage} />
+        <Route path="/forgot-password" exact component={ForgotPasswordPage} />
+        <Route path="/admin/users" exact component={UserListPage} />
+        <Route path="/admin/products" exact component={ProductListPage} />
+        <Route path="/admin/orders" exact component={OrderListPage} />
+        <Route path="*" component={NotFoundPage} />
       </Switch>
       <Footer />
     </Router>
