@@ -32,9 +32,13 @@ const Checkout = ({ location, history }) => {
       <Helmet>
         <meta name="description" content="Afams Val shopping application" />
         <meta name="keywords" content="buy from landing" />
-        <title>Afams Shop -  login</title>
+        <title>Afams Shop - login</title>
         {/* 
-        we use this canonical to tell google where we copied the content that we have in this page so that it will rank that page higher and direct viewers to that page
+        we use this canonical to tell google where we copied the content that we have
+         in this page so that it will rank that page higher and direct viewers to that page.
+          For example, if we have a blog page that we updated while this it the outdated page which have been 
+          indexed by google, we can direct the prospective reader to the new updated page by pointing 
+          to the page from this page using the canonical tool
         <link rel="canonical" href="http://mysite.com/example" /> */}
       </Helmet>
       <div className="login-form ">
